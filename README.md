@@ -1,6 +1,6 @@
 # CKD Vue Select
 
-A foundational select input component that aims to be as simple and bare bones as possible so that it can be extended from in other components that add needed features. It is meant to "just work" as close to native select inputs as possible, all the way down to the little things tab key behavior in different situations.
+A foundational select input component that aims to be as simple and bare bones as possible so that it can be extended from in other components that add needed features. It is meant to "just work," with behavior that mimics native select inputs as close as possible.
 
 ## Installation
 
@@ -10,14 +10,14 @@ yarn add @ckd/vue-select@alpha
 
 ## Demo
 
-A simple demo of several component implementations can be found in the packages /demo directory. It can be run using `yarn serve`
+A simple demo of several component implementations can be found in the package's /demo directory. It can be run using `yarn serve`
 
 ## Usage
 
 Register the component
 ```
-import VSelect from '@ckd/vue-select'
-Vue.component('v-select', VSelect)
+import Select from '@ckd/vue-select'
+Vue.component('v-select', Select)
 ```
 
 Use the component in your markup
@@ -113,7 +113,7 @@ CKD Select supports the following options, all of which are passed as props on t
 
 ## Tests
 
-Tests are written in jest, and can be run with `yarn test`
+Tests are written with jest, and can be run with `yarn test`
 
 ## TODO
 
