@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for select/src/App.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">select/src</a> App.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/6</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;div id="app"&gt;
+&nbsp;
+    &lt;div class="wrapper"&gt;
+      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae mattis augue. Aenean eget quam vel ante fringilla hendrerit. Integer id magna nec ex sodales gravida vitae id mi. Cras efficitur posuere ante, id mollis ligula dignissim a. Suspendisse volutpat laoreet felis. Ut eu elementum urna. Suspendisse molestie purus non viverra rhoncus. Praesent et enim et tellus convallis fringilla. Aliquam leo metus, commodo nec lectus vel, ultricies venenatis mauris. Cras luctus facilisis ante at eleifend. Cras ante felis, dictum eu magna sed, viverra malesuada mauris. Nullam a magna dignissim, euismod sapien sed, dictum sem. Etiam fringilla ipsum at volutpat euismod.&lt;/p&gt;
+      &lt;p&gt;In lorem lacus, venenatis a nisi id, mollis hendrerit elit. Duis at diam eget mauris semper semper. Integer vel varius neque, non rhoncus dolor. Suspendisse sagittis scelerisque ante. Maecenas dapibus elit quis dui pharetra, vitae lobortis odio volutpat. Maecenas in nulla quam. Ut non convallis odio, vitae bibendum diam. In pharetra felis vel lobortis ultricies. Cras pulvinar elit ante, in rutrum enim rutrum luctus. Pellentesque sed purus venenatis, euismod nibh vitae, maximus enim. Donec hendrerit tristique augue, et mollis lacus condimentum id. Aliquam erat volutpat. Donec at aliquam nisi, sit amet ultricies nisl. Integer sit amet consectetur ipsum.&lt;/p&gt;
+      &lt;p&gt;Aliquam consequat erat ut mauris posuere malesuada. Curabitur ac ipsum dictum, facilisis neque vel, aliquam nisl. Mauris pulvinar ex elit, auctor varius erat auctor at. Nulla iaculis gravida metus ut blandit. Sed pulvinar mauris iaculis est viverra ultricies. Integer eget fringilla libero. Donec ut pretium nunc. Suspendisse at turpis mi. Mauris et erat vehicula, rhoncus ante eget, viverra velit. Integer at imperdiet urna.&lt;/p&gt;
+      &lt;p&gt;Quisque vestibulum quis diam non mollis. Vivamus a augue justo. Phasellus a nulla tempus, mollis mi eget, convallis leo. Nam eros sapien, ultrices sit amet gravida a, vulputate quis sem. Nullam vulputate orci ante, ut malesuada sem maximus nec. Etiam euismod eros ac dui bibendum ultricies. Nam ullamcorper, lacus quis posuere egestas, libero lorem mollis leo, ac semper est augue pellentesque diam. Sed porta justo quis velit varius ullamcorper sit amet quis leo. Nam viverra fringilla imperdiet. Cras tincidunt justo vel neque euismod malesuada. Sed suscipit quis enim nec tincidunt. Fusce at ullamcorper dolor.&lt;/p&gt;
+      &lt;p&gt;Nunc mauris lorem, porttitor at massa a, viverra ullamcorper lectus. Vivamus mi lacus, tincidunt in leo sed, interdum interdum nunc. Cras ac porttitor neque, pretium finibus massa. Proin in ultrices est. Etiam nisi neque, tempor et facilisis sit amet, finibus in libero. Cras pulvinar ex et placerat auctor. Cras tristique ex odio, ac convallis felis mattis quis. Sed faucibus nunc et vehicula finibus.&lt;/p&gt;
+      &lt;p&gt;Fusce nisi turpis, porttitor in accumsan eget, molestie quis arcu. Duis ut ante ipsum. Proin condimentum dictum enim non eleifend. Vivamus in sagittis libero. In urna erat, fringilla vel ligula sit amet, bibendum rhoncus erat. Vivamus mollis laoreet ex, sed fringilla est dignissim a. Aenean congue at leo vel fringilla. Etiam bibendum volutpat ante. Duis in nibh vel lectus egestas sagittis. Donec consectetur ornare massa, eu ultricies metus auctor laoreet. Duis interdum dui ut odio finibus, quis bibendum dui volutpat. Duis et justo sed mi feugiat pretium nec ac lectus. Maecenas consectetur nisi eget sapien egestas imperdiet. Fusce gravida mollis nulla in efficitur. Duis consequat vulputate est id lobortis.&lt;/p&gt;
+      &lt;p&gt;Nunc commodo varius pulvinar. Aliquam egestas vehicula tincidunt. In hac habitasse platea dictumst. Vestibulum viverra nibh vel posuere volutpat. Aenean dui enim, congue et imperdiet ut, ultricies quis enim. Nullam sagittis urna libero, id porttitor nisi auctor non. Aenean eu mattis velit. In eu nunc eget ligula eleifend aliquam ac a quam.&lt;/p&gt;
+      &lt;div class="container"&gt;
+        &lt;p&gt;Current Value: {{selected_custom}}&lt;/p&gt;
+        &lt;label class="label"&gt;Choose One&lt;/label&gt;
+        &lt;v-select :options="options" :option="state" v-model="selected_custom" @change="onChanged($event)"&gt;&lt;/v-select&gt;
+      &lt;/div&gt;
+&nbsp;
+      &lt;div class="container"&gt;
+        &lt;p&gt;Current Value: {{selected_native}}&lt;/p&gt;
+        &lt;label class="label"&gt;Choose One&lt;/label&gt;
+        &lt;select v-model="selected_native"&gt;
+          &lt;option value="AL" disabled&gt;Alabama&lt;/option&gt;
+          &lt;option value="AK" disabled&gt;Alaska&lt;/option&gt;
+          &lt;option value="AZ" disabled&gt;Arizona&lt;/option&gt;
+          &lt;option value="AR"&gt;Arkansas&lt;/option&gt;
+          &lt;option value="CA"&gt;California&lt;/option&gt;
+          &lt;option value="CO"&gt;Colorado&lt;/option&gt;
+          &lt;option value="CT"&gt;Connecticut&lt;/option&gt;
+          &lt;option value="DE"&gt;Delaware&lt;/option&gt;
+          &lt;option value="DC"&gt;District Of Columbia&lt;/option&gt;
+          &lt;option value="FL"&gt;Florida&lt;/option&gt;
+          &lt;option value="GA"&gt;Georgia&lt;/option&gt;
+          &lt;option value="HI"&gt;Hawaii&lt;/option&gt;
+          &lt;option value="ID"&gt;Idaho&lt;/option&gt;
+          &lt;optgroup label="Test" disabled&gt;
+            &lt;option value="IL"&gt;Illinois&lt;/option&gt;
+            &lt;option value="IN"&gt;Indiana&lt;/option&gt;
+            &lt;option value="IA"&gt;Iowa&lt;/option&gt;
+          &lt;/optgroup&gt;
+          &lt;option value="KS"&gt;Kansas&lt;/option&gt;
+          &lt;option value="KY"&gt;Kentucky&lt;/option&gt;
+          &lt;option value="LA"&gt;Louisiana&lt;/option&gt;
+          &lt;option value="ME"&gt;Maine&lt;/option&gt;
+          &lt;option value="MD"&gt;Maryland&lt;/option&gt;
+          &lt;option value="MA"&gt;Massachusetts&lt;/option&gt;
+          &lt;option value="MI"&gt;Michigan&lt;/option&gt;
+          &lt;option value="MN"&gt;Minnesota&lt;/option&gt;
+          &lt;option value="MS"&gt;Mississippi&lt;/option&gt;
+          &lt;option value="MO"&gt;Missouri&lt;/option&gt;
+          &lt;option value="MT"&gt;Montana&lt;/option&gt;
+          &lt;option value="NE"&gt;Nebraska&lt;/option&gt;
+          &lt;option value="NV"&gt;Nevada&lt;/option&gt;
+          &lt;option value="NH"&gt;New Hampshire&lt;/option&gt;
+          &lt;option value="NJ"&gt;New Jersey&lt;/option&gt;
+          &lt;option value="NM"&gt;New Mexico&lt;/option&gt;
+          &lt;option value="NY"&gt;New York&lt;/option&gt;
+          &lt;option value="NC"&gt;North Carolina&lt;/option&gt;
+          &lt;option value="ND"&gt;North Dakota&lt;/option&gt;
+          &lt;option value="OH"&gt;Ohio&lt;/option&gt;
+          &lt;option value="OK"&gt;Oklahoma&lt;/option&gt;
+          &lt;option value="OR"&gt;Oregon&lt;/option&gt;
+          &lt;option value="PA"&gt;Pennsylvania&lt;/option&gt;
+          &lt;option value="RI"&gt;Rhode Island&lt;/option&gt;
+          &lt;option value="SC"&gt;South Carolina&lt;/option&gt;
+          &lt;option value="SD"&gt;South Dakota&lt;/option&gt;
+          &lt;option value="TN"&gt;Tennessee&lt;/option&gt;
+          &lt;option value="TX"&gt;Texas&lt;/option&gt;
+          &lt;option value="UT"&gt;Utah&lt;/option&gt;
+          &lt;option value="VT"&gt;Vermont&lt;/option&gt;
+          &lt;option value="VA"&gt;Virginia&lt;/option&gt;
+          &lt;option value="WA"&gt;Washington&lt;/option&gt;
+          &lt;option value="WV" disabled&gt;West Virginia&lt;/option&gt;
+          &lt;option value="WI" disabled&gt;Wisconsin&lt;/option&gt;
+          &lt;option value="WY" disabled&gt;Wyoming&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;p&gt;Etiam velit massa, pharetra eget felis in, venenatis mattis ex. Sed tempor, erat sed interdum bibendum, ex urna gravida sapien, vitae semper eros enim sed turpis. Etiam lacinia cursus tellus, eget imperdiet mi aliquam sit amet. Duis venenatis sapien et elit eleifend, id posuere enim vulputate. Quisque aliquam pretium tellus in efficitur. Etiam pharetra ex id dui bibendum, sit amet convallis lorem aliquet. Etiam varius, arcu a sagittis aliquam, metus enim semper arcu, eu rhoncus tortor lectus a arcu. Integer aliquet porta nibh ac facilisis. Aliquam odio ex, iaculis vel lobortis ut, volutpat et massa. Vestibulum sed congue justo. In scelerisque nec ipsum vel porta. Suspendisse viverra, arcu at ullamcorper fringilla, nibh lacus sollicitudin velit, sed malesuada ligula odio quis augue. Sed sapien urna, imperdiet eget purus et, bibendum pulvinar arcu. In a fermentum ex. Integer in felis sem.&lt;/p&gt;
+      &lt;p&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas ornare consequat imperdiet. Cras sed lorem ut erat gravida laoreet ut sagittis sem. Nam tempor, neque vel maximus lobortis, mauris est bibendum metus, nec faucibus purus nisl nec augue. Aenean suscipit tortor mattis tellus dictum feugiat at sed leo. Aliquam facilisis tempus erat eu efficitur. Maecenas ornare augue ac ante lobortis tincidunt. Aliquam nec blandit nunc. Proin malesuada magna ut risus consectetur vulputate. Maecenas vitae mollis augue. Pellentesque accumsan enim imperdiet tellus lobortis, vel lacinia ligula luctus.&lt;/p&gt;
+      &lt;p&gt;Aenean eleifend nibh vel lobortis efficitur. Aliquam in convallis tellus, a maximus dui. Aenean iaculis, ligula in finibus posuere, nulla est consequat mi, vel rhoncus odio velit finibus diam. Praesent tempor, justo sed varius gravida, libero quam fringilla quam, quis vehicula felis dui et libero. Aliquam in turpis in mi imperdiet gravida. Sed ante enim, ultrices non lorem volutpat, mattis bibendum sapien. Phasellus molestie augue in velit lacinia consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius in leo feugiat convallis. Pellentesque nec ultrices nunc. Nulla vitae congue orci.&lt;/p&gt;
+      &lt;p&gt;Praesent lacinia tortor sit amet scelerisque laoreet. Proin laoreet tempor leo sed rutrum. Sed ut ultrices leo. Aliquam elementum massa in odio ullamcorper, sed venenatis purus dictum. Quisque aliquam augue vitae ultricies tristique. Duis diam dolor, auctor non lectus quis, rutrum accumsan libero. Vestibulum id sapien velit. Phasellus dolor est, facilisis non consequat vel, fermentum vitae magna.&lt;/p&gt;
+      &lt;p&gt;Sed sagittis ipsum ante, et bibendum mi pellentesque vel. Vivamus molestie molestie aliquam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce scelerisque elit non ante porta, in ullamcorper lorem efficitur. Fusce a viverra sem. Curabitur eu lectus ultricies justo ornare pellentesque vel in nulla. Praesent eu venenatis nibh, rutrum cursus nisi. Donec facilisis id magna vel tristique.&lt;/p&gt;
+      &lt;p&gt;Mauris risus velit, ornare a eros auctor, volutpat pretium lorem. Duis in aliquet ligula. Sed efficitur efficitur ex, eu tincidunt arcu commodo a. Maecenas commodo tortor id pretium efficitur. Morbi fermentum purus vitae congue aliquet. Mauris bibendum, velit vitae pellentesque porta, diam ante semper eros, nec euismod felis ligula id neque. Integer ex libero, convallis ac nibh at, dictum dapibus lacus. Duis congue imperdiet turpis condimentum lobortis. Curabitur vitae felis ipsum. Sed molestie euismod suscipit. Nam luctus vitae est eget tincidunt. Aenean ornare vulputate tortor vel tempor. Cras dapibus massa eu quam pellentesque, quis ultrices ante volutpat. Nullam non faucibus nulla. Nunc pharetra mi sapien, a tincidunt dui pharetra sit amet. Nam in facilisis purus, sit amet mattis quam.&lt;/p&gt;
+      &lt;p&gt;Donec condimentum, odio id pretium porta, urna justo ornare diam, eu finibus nibh leo pretium arcu. Etiam leo orci, malesuada ut tincidunt ut, tincidunt non libero. Nam fermentum mi sed urna finibus, in aliquet quam tincidunt. Nulla feugiat consectetur nulla quis pellentesque. Duis in sodales enim. Phasellus mollis, erat at mollis sodales, arcu lectus imperdiet lacus, id tristique ipsum orci a enim. Etiam est lectus, tristique a eleifend non, cursus vel erat. Duis ullamcorper ante ac est laoreet ornare. Sed viverra a sem quis tincidunt.&lt;/p&gt;
+      &lt;p&gt;Suspendisse tempus nec mauris vitae sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla molestie accumsan mauris, nec consectetur est fermentum id. Maecenas in gravida orci. Suspendisse quis nulla vitae elit rhoncus eleifend. Nullam et sapien id mauris varius porttitor vel sit amet tortor. Integer bibendum leo eget nulla pretium fringilla. Proin turpis sapien, mattis a massa nec, malesuada scelerisque arcu. Aenean odio turpis, maximus sed nisl ac, consequat venenatis nunc.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import VSelect from './components/select.vue'</span>
+<span class="cstat-no" title="statement not covered" >import VState from './components/select/components/state.vue'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import States from './components/select/data/states.json'</span>
+<span class="cstat-no" title="statement not covered" >import Countries from './components/select/data/countries.json'</span>
+&nbsp;
+&nbsp;
+export default {
+  name: 'app',
+  components: { VSelect },
+  methods: {
+<span class="fstat-no" title="function not covered" >    onChanged: function(val){</span>
+<span class="cstat-no" title="statement not covered" >      console.log(val)</span>
+    }
+  },
+<span class="fstat-no" title="function not covered" >  data: function(){</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      options: States,
+      state: VState,
+      selected_custom: null,
+      selected_native: null
+    }
+  }
+};
+&lt;/script&gt;
+&nbsp;
+&lt;style lang="scss"&gt;
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin: 150px 0;
+  text-align: center;
+}
+&nbsp;
+.wrapper {
+  width: 60%;
+  margin: 0 auto;
+  padding: 15px;
+  overflow: auto;
+  max-height: 600px;
+  border: 1px solid #ccc;
+}
+&nbsp;
+.wrapper p {
+  text-align: left;
+&nbsp;
+  &amp;:first-child {
+    margin-top: 0;
+  }
+&nbsp;
+  &amp;:last-child {
+    margin-bottom: 0;
+  }
+}
+&nbsp;
+.container {
+  text-align: left;
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+&nbsp;
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+}
+&nbsp;
+.v-select {
+  max-width: 100px;
+}
+&lt;/style&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 14 2019 11:17:59 GMT-0700 (MST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
