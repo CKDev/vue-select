@@ -1,5 +1,5 @@
 <template>
-  <div class="v-option" :class="state" :style="{ 'padding-left': `${12 + 12 * option.state.depth}px` }" role="option" v-bind="aria">
+  <div class="v-option" :class="classes" :style="{ 'padding-left': `${12 + 12 * option.state.depth}px` }" role="option" v-bind="aria">
     <div class="label" v-html="option.item"></div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
         'aria-selected': this.option.selected ? 'true' : 'false'
       }
     },
-    state: function(){
+    classes: function(){
       return {
         'is-disabled':    this.option.disabled,
         'is-selected':    this.option.selected,

@@ -1,19 +1,24 @@
 {
   "name": "@ckd/vue-select",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "https://github.com/CKDev/vue-select",
   "scripts": {
     "serve": "vue-cli-service serve demo/main.js",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern --target lib src/select.vue",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit"
   },
-  "main": "index.js",
+  "main": "src/select.vue",
+  "unpkg": "dist/@ckd/vue-select.umd.min.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "dependencies": {
     "debounce": "^1.2.0",
-    "vue": "^2.5.17",
-    "vue-jest": "^3.0.2"
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
@@ -27,8 +32,8 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
+    "vue": "^2.5.17",
+    "vue-jest": "^3.0.2",
     "vue-template-compiler": "^2.5.17"
   },
   "publishConfig": {
@@ -58,7 +63,9 @@
     }
   },
   "babel": {
-    "presets": ["@vue/app"]
+    "presets": [
+      "@vue/app"
+    ]
   },
   "jest": {
     "moduleFileExtensions": [

@@ -15,13 +15,13 @@
         <div class="container">
           <p class="current"><strong>Current Value:</strong> {{selected_custom_country}}</p>
           <label class="input-label">Choose A Country</label>
-          <v-select :options="countries" :disabled="true" placeholder="Select a State..." v-model="selected_custom_country" @change="onChanged($event)"></v-select>
+          <v-select :options="countries" placeholder="Select a State..." v-model="selected_custom_country"></v-select>
         </div>
 
         <div class="container">
           <p class="current"><strong>Current Value:</strong> {{selected_native_country}}</p>
           <label class="input-label">Choose A Country</label>
-          <select v-model="selected_native_country" disabled="disabled">
+          <select v-model="selected_native_country">
             <option value="AF" disabled="">Afghanistan</option>
             <option value="AX" disabled="">Åland Islands</option>
             <option value="AL" disabled="">Albania</option>
@@ -280,7 +280,7 @@
         <div class="container">
           <p class="current"><strong>Current Value:</strong> {{selected_custom_state}}</p>
           <label class="input-label">Choose A State</label>
-          <v-select :options="states" :option="state_option" v-model="selected_custom_state" @change="onChanged($event)"></v-select>
+          <v-select :options="states" :option="state_option" v-model="selected_custom_state"></v-select>
         </div>
 
         <div class="container">
@@ -347,7 +347,7 @@
         <div class="container">
           <p class="current"><strong>Current Value:</strong> {{selected_custom_cocktail}}</p>
           <label class="input-label">Choose A Cocktail</label>
-          <v-fancy :options="cocktails" :size="200" v-model="selected_custom_cocktail" @change="onChanged($event)"></v-fancy>
+          <v-fancy :options="cocktails" :size="200" v-model="selected_custom_cocktail"></v-fancy>
         </div>
 
         <div class="container">
@@ -478,7 +478,7 @@
 </template>
 
 <script>
-import VSelect from '../src/select.vue'
+import VSelect from '../dist/@ckd/vue-select.umd.js'
 import VFancy from './components/fancy.vue'
 
 import VState from './components/option/state.vue'
@@ -490,11 +490,6 @@ import Cocktails from './data/cocktails.json'
 export default {
   name: 'app',
   components: { VSelect, VFancy },
-  methods: {
-    onChanged: function(val){
-      console.log(val)
-    }
-  },
   data: function(){
     return {
       states: States,
@@ -509,7 +504,7 @@ export default {
       selected_native_country: null,
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -568,24 +563,6 @@ h1 {
   font-size: 13px;
   font-weight: bold;
 }
-
-/*
-.v-select {
-  max-width: 100px;
-}
-
-.v-select .options {
-  font-size: 13px;
-}
-
-.v-optgroup .label {
-  font-weight: bold;
-}
-
-select {
-  max-width: 100px;
-}
-*/
 
 @media only screen and (max-width: 800px) {
   #app {

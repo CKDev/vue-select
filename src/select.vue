@@ -1,10 +1,10 @@
 <template>
-  <div class="v-select" :class="classes" :style="variables" role="listbox" tabindex="0" @click.stop @keydown="onFilter($event)" @keydown.enter="onEnter()" @keydown.tab="onTab($event)" @keydown.up="onArrowPress($event, -1)" @keydown.down="onArrowPress($event, 1)" @keydown.left="onArrowPress($event, -1)" @keydown.right="onArrowPress($event, 1)" @keydown.space.prevent="onToggle(true)" @keydown.esc="onEscape()" @focus="onToggleFocus(true)" @blur="onToggleFocus(false)">
+  <div class="v-select" :class="classes" :style="variables" role="listbox" tabindex="0" @click.stop @keydown="onFilter($event)" @keydown.enter="onEnter()" @keydown.tab="onTab($event)" @keydown.up.prevent="onArrowPress(-1)" @keydown.down.prevent="onArrowPress(1)" @keydown.left.prevent="onArrowPress(-1)" @keydown.right.prevent="onArrowPress(1)" @keydown.space.prevent="onToggle(true)" @keydown.esc="onEscape()" @focus="onToggleFocus(true)" @blur="onToggleFocus(false)">
     <div ref="label" class="label" v-html="label || placeholder" @click.prevent="onToggle()"></div>
     <div ref="options" class="options" style="animation-duration: 0s;" :aria-hidden="!open">
       <template v-for="opt in list">
         <component v-if="opt.state.group" :key="opt.state.index" :is="optgroup" :group="opt"></component>
-        <component v-else :is="option" :key="opt.state.index" :option="opt" @click.native.stop="onClickOption(opt.state.index)" @mouseover.native="onHover($event, opt.state.index)"></component>
+        <component v-else :is="option" :key="opt.state.index" :option="opt" @click.native.stop="onClickOption(opt.state.index)" @mouseover.native="onHover(opt.state.index)"></component>
       </template>
     </div>
     <select ref="select" class="select" tabindex="-1" v-html="getOptionsHtml()" @change="onSelectChanged($event)"></select>
@@ -256,11 +256,7 @@ export default {
         return Object.assign({ value: '', label: '', item: option.label || '', selected: false, disabled: false }, option, attrs)
       }
     },
-    onArrowPress: function(event, offset){
-      // Don't propagate (may cause things like scrolling down the page)
-      event.preventDefault()
-      event.stopPropagation()
-
+    onArrowPress: function(offset){
       // If not seeking, add the class
       if(!this.$el.classList.contains('is-seeking')){
         this.$el.classList.add('is-seeking')
@@ -308,26 +304,26 @@ export default {
       const code = event.keyCode || event.which
       const char = String.fromCharCode(code)
 
-      if(/[a-z0-9-_]/i.test(char)){
+      if(/[a-z0-9-_ ]/i.test(char)){
         this.filter += char
 
         const match = new RegExp(`^${this.filter}`, 'i')
         const tmp = document.createElement('DIV')
 
         const result = this.list.filter(o => !o.state.group && !o.disabled).find((o) => {
-          tmp.innerHTML = o.item || o.label
-          let text = (tmp.textContent || tmp.innerText || o.label).replace(/^\s+/, '')
+          tmp.innerHTML = o.item
+          let text = (tmp.textContent || tmp.innerText || o.item).replace(/^\s+/, '')
           return match.test(text)
         })
 
         if(result){
-          this.onClickOption(result.state.index)
+          this.onClickOption(result.state.index, this.open)
         }
       }
 
       this.resetFilter()
     },
-    onHover: function(event, idx){
+    onHover: function(idx){
       this.hoverIndex = idx
     },
     onTab: function(event){
@@ -366,6 +362,11 @@ export default {
     onClickOption: function(idx, close){
       this.getAvailableOptions().forEach(o => o.selected = o.state.index == idx)
       this.highlightIndex = idx
+
+      this.$nextTick(() => {
+        this.scrollToHighlighted()
+      })
+
       this.open = !!close
     },
     /**

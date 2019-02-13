@@ -1,5 +1,5 @@
 <template>
-  <div class="v-option" :class="state" :style="{ 'padding-left': `${12 + 12 * option.state.depth}px` }" role="option" v-bind="aria">
+  <div class="v-option" :class="classes" :style="{ 'padding-left': `${12 + 12 * option.state.depth}px` }" role="option" v-bind="aria">
     <img class="icon" src="https://placekitten.com/20/20" width="20" height="20" />
     <div class="label" v-html="option.item"></div>
   </div>

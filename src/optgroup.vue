@@ -1,5 +1,5 @@
 <template>
-  <div class="v-optgroup" :class="state" :style="{ 'padding-left': `${12 + 12 * group.state.depth}px` }">
+  <div class="v-optgroup" :class="classes" :style="{ 'padding-left': `${12 + 12 * group.state.depth}px` }">
     <div class="label" v-html="group.label"></div>
   </div>
 </template>
@@ -15,9 +15,9 @@ export default {
   },
   computed: {
     aria: function(){
-      return {} // What aria attributes are associated with optgroups
+      return {} // What aria attributes are associated with optgroups?
     },
-    state: function(){
+    classes: function(){
       return {
         'is-disabled': this.group.disabled
       }
