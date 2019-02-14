@@ -262,31 +262,22 @@ export default {
         this.$el.classList.add('is-seeking')
       }
 
+      const permitted = this.getAvailableOptions().map(o => o.state.index)
+
       // `resetHover` uses `debounce`, so it only is called after 100ms
       // Each call to `resetHover` actually resets the clock
       this.resetHover()
 
-      if(this.highlightIndex < 0){
-        // Nothing is yet highlighted, so highlight the first available option
-        if(this.highlightIndex < 0 && this.hoverIndex >= 0){
-          // If hovering over an option, that option should be highlighted
-          this.highlightIndex = this.hoverIndex
-        }else{
-          // Highlight the first available option
-          this.highlightIndex = this.hasAvailableOptions() ? this.getAvailableOptions()[0].state.index : -1
-        }
+      if(this.highlightIndex < 0 && this.hoverIndex < 0){
+        // If nothing is highlighted or hovered, highlight the first available option
+        this.highlightIndex = permitted[0]
+      }else if(this.highlightIndex < 0 && this.hoverIndex >= 0){
+        // If hovering over an option, that option should be highlighted
+        this.highlightIndex = this.hoverIndex
       }else{
-        if(offset < 0){
-          // Moving up the list
-          let candidates = this.list.slice(0, this.highlightIndex).filter(o => !o.state.group && !o.disabled)
-          // If any options to move to, move to the closest (last) one in the list
-          if(candidates.length) this.highlightIndex = candidates.pop().state.index
-        }else{
-          // Moving down the list
-          let candidates = this.list.slice(this.highlightIndex + 1, this.list.length - 1).filter(o => !o.state.group && !o.disabled)
-          // If any options to move to, move to the closest (first) one in the list
-          if(candidates.length) this.highlightIndex = candidates.shift().state.index
-        }
+        // Moving up or down the list, find the next option by the offset given
+        const nextIndex = permitted[permitted.indexOf(this.hoverIndex) + offset]
+        if(!isNaN(nextIndex)) this.highlightIndex = nextIndex
       }
 
       // Consider that highlighting in this context is the same as hovering
