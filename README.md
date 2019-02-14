@@ -5,7 +5,7 @@ A foundational select input component that aims to be as simple and bare bones a
 ## Installation
 
 ```
-yarn add @ckd/vue-select@alpha
+yarn add @ckd/vue-select@0.1.1-alpha.3
 ```
 
 ## Demo
