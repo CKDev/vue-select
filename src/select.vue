@@ -570,7 +570,7 @@ export default {
   position: fixed;
   top: var(--top);
   left: var(--left);
-  width: var(--width);
+  min-width: var(--width);
   animation: hide 150ms ease-out;
   animation-fill-mode: forwards;
 }

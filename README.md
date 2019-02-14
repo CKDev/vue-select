@@ -5,7 +5,7 @@ A foundational select input component that aims to be as simple and bare bones a
 ## Installation
 
 ```
-yarn add @ckd/vue-select@0.1.1-alpha.3
+yarn add @ckd/vue-select@0.1.1-alpha.4
 ```
 
 ## Demo
@@ -14,13 +14,29 @@ A simple demo of several component implementations can be found in the package's
 
 ## Usage
 
-Register the component
+Register the component for use in a Vue application
+
 ```
 import Select from '@ckd/vue-select'
 Vue.component('v-select', Select)
 ```
 
-Use the component in your markup
+or, use UMD:
+
+```
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/@ckd/vue-select"></script>
+
+<script>
+new Vue({
+  components: {
+    VMultiselect: window['@ckd/vue-select']
+  }
+}).$mount('#app')
+</script>
+```
+
+Then, use the component in your markup
 ```
 <v-select v-model="selection" :options="options"></v-select>
 ```
