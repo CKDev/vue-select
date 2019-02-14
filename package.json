@@ -13,7 +13,8 @@
   "unpkg": "dist/@ckd/vue-select.umd.min.js",
   "files": [
     "src",
-    "dist"
+    "dist",
+    "directives"
   ],
   "dependencies": {
     "debounce": "^1.2.0",
