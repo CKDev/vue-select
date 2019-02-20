@@ -478,7 +478,7 @@
 </template>
 
 <script>
-import VSelect from '../dist/@ckd/vue-select.umd.js'
+import VSelect from '../src/select.vue'
 import VFancy from './components/fancy.vue'
 
 import VState from './components/option/state.vue'

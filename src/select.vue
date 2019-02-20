@@ -54,23 +54,6 @@ export default {
     }
   },
   created: function(){
-    // When clicked anywhere, close the dropdown
-    // This event is prevented if the click occurs on the dropdown itself
-    document.addEventListener('click', (event) => {
-      if(!this.$el.contains(event.target)){
-        this.onClickOutside()
-      }
-    })
-
-    // When a scroll event occurs anywhere except the dropdown itself,
-    // close the dropdown, but continue to re-position it as it scrolls
-    // The re-positioning is to take into account longer transition-out animations
-    window.addEventListener('scroll', (event) => {
-      this.calcPosition()
-      this.calcDirection()
-      if(this.open && !this.$el.contains(event.target)) this.open = false
-    }, true)
-
     // Set the complete list of option/optgroup data by "repairing"
     // each provided option hash with the required/needed data
     this.list = this.options.reduce((options, o) => {
@@ -94,6 +77,23 @@ export default {
     }
   },
   mounted: function(){
+    // When clicked anywhere, close the dropdown
+    // This event is prevented if the click occurs on the dropdown itself
+    document.addEventListener('click', (event) => {
+      if(!this.$el.contains(event.target)){
+        this.onClickOutside()
+      }
+    })
+
+    // When a scroll event occurs anywhere except the dropdown itself,
+    // close the dropdown, but continue to re-position it as it scrolls
+    // The re-positioning is to take into account longer transition-out animations
+    window.addEventListener('scroll', (event) => {
+      this.calcPosition()
+      this.calcDirection()
+      if(this.open && !this.$el.contains(event.target)) this.open = false
+    }, true)
+
     this.calcPosition()
     this.calcDirection()
     this.calcDimensions()
@@ -525,7 +525,7 @@ export default {
   outline-color: Highlight;
 }
 
-@media (-webkit-min-device-pixel-ratio:0) {
+@media (-webkit-min-device-pixel-ratio: 0) {
   .v-select.is-focused .label {
     outline-color: -webkit-focus-ring-color;
     outline-style: auto;

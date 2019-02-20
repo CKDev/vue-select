@@ -82,16 +82,21 @@ describe('select.vue', () => {
     })
   })
 
-  it('should move to prev/next available option on arrow key press', () => {
+  it('should move to prev/next available option on arrow key press', (done) => {
     const wrapper = mount(Select, { propsData: { options: States } })
     const options = wrapper.findAll('.v-option:not(.is-disabled)')
     const initialIndex = options.at(Math.floor(options.length / 2)).vm.option.state.index
     wrapper.setData({ open: true, highlightIndex: initialIndex })
     wrapper.trigger('keydown.down')
-    expect(wrapper.find('.v-option.is-highlighted').vm.option.state.index).toBeGreaterThan(initialIndex)
-    wrapper.trigger('keydown.up')
-    wrapper.trigger('keydown.up')
-    expect(wrapper.find('.v-option.is-highlighted').vm.option.state.index).toBeLessThan(initialIndex)
+    console.log(wrapper.find('.v-option.is-highlighted').vm.option)
+
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.find('.v-option.is-highlighted').vm.option.state.index).toBeGreaterThan(initialIndex)
+      wrapper.trigger('keydown.up')
+      wrapper.trigger('keydown.up')
+      expect(wrapper.find('.v-option.is-highlighted').vm.option.state.index).toBeLessThan(initialIndex)
+      done()
+    })
   })
 
   it('should highlight the currently hovered option on keypress', () => {
