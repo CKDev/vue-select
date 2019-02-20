@@ -275,6 +275,9 @@ export default {
         // If hovering over an option, that option should be highlighted
         this.highlightIndex = this.hoverIndex
       }else{
+        // Ensure our hoverIndex is the same as highlightIndex if not set already
+        if(this.highlightIndex > -1 && this.hoverIndex < 0) this.hoverIndex = this.highlightIndex
+
         // Moving up or down the list, find the next option by the offset given
         const nextIndex = permitted[permitted.indexOf(this.hoverIndex) + offset]
         if(!isNaN(nextIndex)) this.highlightIndex = nextIndex
