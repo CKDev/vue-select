@@ -209,7 +209,6 @@ export default {
     },
     calcDirection: debounce(function(){
       const space = this.getAvailableSpace()
-      console.log(space.bottom, space.top, this.$refs.options.offsetHeight)
       this.direction = space.bottom >= space.top || (space.bottom - 30) > this.$refs.options.offsetHeight ? 'is-down' : 'is-up'
     }, 200),
     getRepairedItem: function(option, depth, attrs){
