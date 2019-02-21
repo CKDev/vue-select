@@ -184,7 +184,7 @@ export default {
         this.$refs.options.style.minWidth = '0'
         this.$refs.options.style.position = 'absolute'
         this.$refs.options.style.display = 'inline-block'
-        this.width = this.$refs.options.offsetWidth
+        this.width = Math.max(this.$refs.options.offsetWidth, this.$el.offsetWidth)
         this.$refs.options.style.display = initialDisplay
         this.$refs.options.style.minWidth = initialMinWidth
         this.$refs.options.style.position = ''
