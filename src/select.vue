@@ -209,7 +209,8 @@ export default {
     },
     calcDirection: debounce(function(){
       const space = this.getAvailableSpace()
-      this.delta = space.bottom - space.top
+      console.log(space.bottom, space.top, this.$refs.options.offsetHeight)
+      this.direction = space.bottom >= space.top || (space.bottom - 30) > this.$refs.options.offsetHeight ? 'is-down' : 'is-up'
     }, 200),
     getRepairedItem: function(option, depth, attrs){
       // Set a default depth of zero
@@ -441,9 +442,6 @@ export default {
         '--left': `${this.left}px`
       }
     },
-    direction: function(){
-      return this.delta >= 0 ? 'is-down' : 'is-up'
-    },
     selection: function(){
       return this.list.find(o => !o.state.group && !o.disabled && o.selected)
     },
@@ -470,7 +468,7 @@ export default {
       top: 0,
       left: 0,
       height: this.size,
-      delta: 0
+      direction: 'is-down'
     }
   }
 }

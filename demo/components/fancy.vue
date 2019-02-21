@@ -1,15 +1,15 @@
 <template>
-  <div class="v-select" :class="classes" :style="variables" role="listbox" tabindex="0" @click.stop @keydown="onFilter($event)" @keydown.enter="onEnter()" @keydown.tab="onTab($event)" @keydown.up="onArrowPress($event, -1)" @keydown.down="onArrowPress($event, 1)" @keydown.left="onArrowPress($event, -1)" @keydown.right="onArrowPress($event, 1)" @keydown.space="onToggle($event, true)" @keydown.esc="onEscape()" @focus="focused = true" @blur="focused = false">
+  <div class="v-select" :class="classes" :style="variables" role="listbox" tabindex="0" @click.stop @keydown="onFilter($event)" @keydown.enter="onEnter()" @keydown.tab="onTab($event)" @keydown.up="onArrowPress(-1)" @keydown.down="onArrowPress(1)" @keydown.left="onArrowPress(-1)" @keydown.right="onArrowPress(1)" @keydown.space="onToggle(true)" @keydown.esc="onEscape()" @focus="onToggleFocus(true)" @blur="onToggleFocus(false)">
     <div ref="label" class="label" v-html="label || placeholder" @click="onToggle()"></div>
     <div ref="options" class="options-wrapper" style="animation-duration: 0s;" :aria-hidden="!open">
       <div ref="scroll" class="options">
         <template v-for="opt in list">
           <component v-if="opt.state.group" :is="optgroup" :group="opt"></component>
-          <component v-else :is="option" :option="opt" @click.native.stop="onClickOption(opt.state.index)" @mouseover.native="onHover($event, opt.state.index)"></component>
+          <component v-else :is="option" :option="opt" @click.native.stop="onClickOption(opt.state.index)" @mouseover.native="onHover(opt.state.index)"></component>
         </template>
       </div>
     </div>
-    <select ref="select" class="select" tabindex="-1" v-html="getOptionsHtml()" @change="onSelectChanged($event)" @focus="focused = true"></select>
+    <select ref="select" class="select" tabindex="-1" v-html="getOptionsHtml()" @change="onSelectChanged($event)"></select>
   </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
   position: relative;
   background: #fff;
   outline: none;
+  width: var(--width);
 }
 
 .v-select * {
@@ -113,7 +114,7 @@ export default {
 }
 
 .options-wrapper {
-  position: absolute;
+  position: fixed;
   top: var(--top);
   left: var(--left);
   width: var(--width);
