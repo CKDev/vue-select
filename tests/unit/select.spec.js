@@ -30,6 +30,11 @@ describe('select.vue', () => {
     expect(wrapper.vm.focused).toBeFalsy()
   })
 
+  it('should default to selecting the bound v-model value', () => {
+    const wrapper = mount(Select, { propsData: { options: States, value: 'CO' } })
+    expect(wrapper.vm.selection.value).toEqual('CO')
+  })
+
   it('should display the placeholder if no value selected', () => {
     const wrapper = shallowMount(Select, { propsData: { placeholder: 'Hello World' } })
     expect(wrapper.find('.label').text()).toEqual('Hello World')

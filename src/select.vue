@@ -48,7 +48,7 @@ export default {
       type: String,
       default: ''
     },
-    selected: {
+    value: {
       type: [String, Number],
       default: null
     }
@@ -64,10 +64,10 @@ export default {
       // One of the enabled options in the input json was selected
       // Set the current highlight index to the selected options index
       this.highlightIndex = this.selection.state.index
-    }else if(this.selected !== null){
+    }else if(this.value !== null){
       // If the selected prop was provided, try and find the selected option
       // in the list of enabled options
-      const option = this.getAvailableOptions().find(o => o.value == this.selected)
+      const option = this.getAvailableOptions().find(o => o.value == this.value)
 
       if(option){
         // A match was found, so set it as the selected & highlighted option
