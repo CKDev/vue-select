@@ -485,6 +485,7 @@ export default {
   position: relative;
   background: #fff;
   outline: none;
+  width: var(--width);
 
   &.is-disabled .label {
     cursor: default;
@@ -546,7 +547,7 @@ export default {
   display: block;
   border: 1px solid #e5e5e5;
   padding: 6px 10px;
-  width: var(--width);
+  width: 100%;
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
