@@ -194,15 +194,18 @@ export default {
       const location = this.$el.getBoundingClientRect()
       const space = this.getAvailableSpace()
 
-      if(space.bottom >= space.top){
+      // Prefer to open downwards if there is enough room,
+      // regardless of whether top has more available space
+      // Include 30px margin space, so we don't open right to the edge
+      if(space.bottom >= space.top || (space.bottom - 30) > this.$refs.options.offsetHeight){
         this.height = Math.min(space.bottom, this.size + 30) - 30
-        this.top = location.top
+        this.top = location.y
       }else{
         this.height = Math.min(space.top, this.size + 30) - 30
-        this.top = location.top - this.$refs.label.offsetHeight - this.height
+        this.top = location.y - this.$refs.label.offsetHeight - this.$refs.options.offsetHeight
       }
 
-      this.left = location.left
+      this.left = location.x
     },
     calcDirection: debounce(function(){
       const space = this.getAvailableSpace()

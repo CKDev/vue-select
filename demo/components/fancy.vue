@@ -113,7 +113,7 @@ export default {
 }
 
 .options-wrapper {
-  position: fixed;
+  position: absolute;
   top: var(--top);
   left: var(--left);
   width: var(--width);
