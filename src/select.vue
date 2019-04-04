@@ -321,6 +321,8 @@ export default {
       this.resetFilter()
     },
     onHover: function(idx){
+      const option = this.list.find(o => o.state.index === idx)
+      if(!option || option.disabled) return
       this.hoverIndex = idx
     },
     onTab: function(event){
