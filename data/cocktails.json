@@ -160,21 +160,16 @@
         "value": "El Toro Loco Patron and Redbull"
       },
       {
-        "label": "My Group",
-        "options": [
-          {
-            "label": "Juan Collins",
-            "value": "Juan Collins"
-          },
-          {
-            "label": "Long Island Iced Tea",
-            "value": "Long Island Iced Tea"
-          },
-          {
-            "label": "Margarita",
-            "value": "Margarita"
-          }
-        ]
+        "label": "Juan Collins",
+        "value": "Juan Collins"
+      },
+      {
+        "label": "Long Island Iced Tea",
+        "value": "Long Island Iced Tea"
+      },
+      {
+        "label": "Margarita",
+        "value": "Margarita"
       },
       {
         "label": "Matador",
