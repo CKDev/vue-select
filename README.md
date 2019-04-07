@@ -5,7 +5,7 @@ A foundational select input component that aims to be as simple and bare bones a
 ## Installation
 
 ```
-yarn add @ckd/vue-select@0.1.1-alpha.4
+yarn add @ckd/vue-select@0.1.1-alpha.7
 ```
 
 ## Demo
@@ -18,6 +18,7 @@ Register the component for use in a Vue application
 
 ```
 import Select from '@ckd/vue-select'
+import '@ckd/vue-select/dist/@ckd/vue-select.css'
 Vue.component('v-select', Select)
 ```
 
@@ -27,10 +28,12 @@ or, use UMD:
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/@ckd/vue-select"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/@ckd/vue-select@0.1.1-alpha.7/dist/@ckd/vue-select.css">
+
 <script>
 new Vue({
   components: {
-    VMultiselect: window['@ckd/vue-select']
+    'v-select': window['@ckd/vue-select']
   }
 }).$mount('#app')
 </script>
