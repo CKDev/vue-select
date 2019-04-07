@@ -53,7 +53,7 @@ export default {
       default: null
     }
   },
-  created: function(){
+  beforeMount: function(){
     // Set the complete list of option/optgroup data by "repairing"
     // each provided option hash with the required/needed data
     this.list = this.options.reduce((options, o) => {
@@ -412,10 +412,11 @@ export default {
       return this.list.filter(o => !o.state.group && !o.disabled)
     },
     isMobile: function(){
+      const agent = process.client ? navigator.userAgent : null
       if(this.native instanceof Function){
-        return this.native(navigator.userAgent)
+        return this.native(agent)
       }
-      return this.native && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      return this.native && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(agent)
     },
     resetFilter: debounce(function(){
       this.filter = ''

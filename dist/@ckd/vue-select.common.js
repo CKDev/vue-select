@@ -204,6 +204,17 @@ module.exports = function (S, index, unicode) {
 
 /***/ }),
 
+/***/ "07e3":
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+
+/***/ }),
+
 /***/ "0a49":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -290,6 +301,20 @@ module.exports = Object.keys || function keys(O) {
 
 /***/ }),
 
+/***/ "0fc9":
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__("3a38");
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+
+/***/ }),
+
 /***/ "1169":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -345,33 +370,47 @@ module.exports = __webpack_require__("9e1e") ? Object.defineProperties : functio
 
 /***/ }),
 
-/***/ "1f96":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "1691":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".v-select[data-v-56fe985c]{display:inline-block;min-width:10px;-webkit-box-sizing:border-box;box-sizing:border-box;text-align:left;position:relative;background:#fff;outline:none;width:var(--width)}.v-select.is-disabled .label[data-v-56fe985c]{cursor:default}.v-select.is-open .options[data-v-56fe985c]{z-index:1;-webkit-animation:show-data-v-56fe985c .15s ease-out;animation:show-data-v-56fe985c .15s ease-out;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.v-select.is-seeking .v-option[data-v-56fe985c]{pointer-events:none}.v-select.is-mobile .select[data-v-56fe985c]{opacity:0;display:block;width:100%;height:100%;position:absolute;left:0;top:0}.v-select.is-focused .label[data-v-56fe985c]{outline-width:2px;outline-style:solid;outline-color:Highlight}@media (-webkit-min-device-pixel-ratio:0){.v-select.is-focused .label[data-v-56fe985c]{outline-color:-webkit-focus-ring-color;outline-style:auto}}.v-select *[data-v-56fe985c]{-webkit-box-sizing:border-box;box-sizing:border-box}.label[data-v-56fe985c]{display:block;border:1px solid #e5e5e5;padding:6px 10px;width:100%;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;font-weight:400;font-size:16px;line-height:1.4}.label[data-v-56fe985c]:empty:after{content:\".\";visibility:hidden}.options[data-v-56fe985c]{overflow:auto;z-index:0;border:1px solid #e5e5e5;max-height:var(--height);background:inherit;position:fixed;top:var(--top);left:var(--left);min-width:var(--width);-webkit-animation:hide-data-v-56fe985c .15s ease-out;animation:hide-data-v-56fe985c .15s ease-out;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.select[data-v-56fe985c]{cursor:pointer;display:none}@-webkit-keyframes hide-data-v-56fe985c{0%{display:block;opacity:1}99%{display:block;-webkit-transform:scale(1);transform:scale(1)}to{display:none;-webkit-transform:scale(0);transform:scale(0);opacity:0}}@keyframes hide-data-v-56fe985c{0%{display:block;opacity:1}99%{display:block;-webkit-transform:scale(1);transform:scale(1)}to{display:none;-webkit-transform:scale(0);transform:scale(0);opacity:0}}@-webkit-keyframes show-data-v-56fe985c{0%{display:none;opacity:0}1%{display:block;opacity:0}to{display:block;opacity:1}}@keyframes show-data-v-56fe985c{0%{display:none;opacity:0}1%{display:block;opacity:0}to{display:block;opacity:1}}", ""]);
-
-// exports
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
 
 
 /***/ }),
 
-/***/ "2026":
+/***/ "1bc3":
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = __webpack_require__("f772");
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
 
-// load the styles
-var content = __webpack_require__("1f96");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("621b5125", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
+/***/ "1ec9":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("f772");
+var document = __webpack_require__("e53d").document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
 
 /***/ }),
 
@@ -479,17 +518,6 @@ module.exports = function (KEY, length, exec) {
 
 /***/ }),
 
-/***/ "2191":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_56fe985c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2026");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_56fe985c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_56fe985c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_56fe985c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
 /***/ "230e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -500,89 +528,6 @@ var is = isObject(document) && isObject(document.createElement);
 module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
-
-
-/***/ }),
-
-/***/ "2350":
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
 
 
 /***/ }),
@@ -617,10 +562,142 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "2621":
+/***/ "241e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.13 ToObject(argument)
+var defined = __webpack_require__("25eb");
+module.exports = function (it) {
+  return Object(defined(it));
+};
+
+
+/***/ }),
+
+/***/ "25eb":
 /***/ (function(module, exports) {
 
-exports.f = Object.getOwnPropertySymbols;
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+
+/***/ }),
+
+/***/ "2877":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ "294c":
+/***/ (function(module, exports) {
+
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
 
 
 /***/ }),
@@ -632,8 +709,8 @@ var global = __webpack_require__("7726");
 var hide = __webpack_require__("32e9");
 var has = __webpack_require__("69a8");
 var SRC = __webpack_require__("ca5a")('src');
+var $toString = __webpack_require__("fa5b");
 var TO_STRING = 'toString';
-var $toString = Function[TO_STRING];
 var TPL = ('' + $toString).split(TO_STRING);
 
 __webpack_require__("8378").inspectSource = function (it) {
@@ -764,14 +841,63 @@ module.exports = __webpack_require__("9e1e") ? function (object, key, value) {
 
 /***/ }),
 
+/***/ "335c":
+/***/ (function(module, exports, __webpack_require__) {
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = __webpack_require__("6b4c");
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+
+/***/ }),
+
+/***/ "355d":
+/***/ (function(module, exports) {
+
+exports.f = {}.propertyIsEnumerable;
+
+
+/***/ }),
+
+/***/ "35e8":
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__("d9f6");
+var createDesc = __webpack_require__("aebd");
+module.exports = __webpack_require__("8e60") ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+
+/***/ }),
+
 /***/ "3688":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7f35");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7414");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "36c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__("335c");
+var defined = __webpack_require__("25eb");
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
 
 /***/ }),
 
@@ -790,6 +916,19 @@ module.exports = Object.getPrototypeOf || function (O) {
   if (typeof O.constructor == 'function' && O instanceof O.constructor) {
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
+};
+
+
+/***/ }),
+
+/***/ "3a38":
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
 
 
@@ -866,6 +1005,43 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "4362":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports.nextTick = function nextTick(fn) {
+	setTimeout(fn, 0);
+};
+
+exports.platform = exports.arch = 
+exports.execPath = exports.title = 'browser';
+exports.pid = 1;
+exports.browser = true;
+exports.env = {};
+exports.argv = [];
+
+exports.binding = function (name) {
+	throw new Error('No such module. (Possibly not yet loaded)')
+};
+
+(function () {
+    var cwd = '/';
+    var path;
+    exports.cwd = function () { return cwd };
+    exports.chdir = function (dir) {
+        if (!path) path = __webpack_require__("df7c");
+        cwd = path.resolve(dir, cwd);
+    };
+})();
+
+exports.exit = exports.kill = 
+exports.umask = exports.dlopen = 
+exports.uptime = exports.memoryUsage = 
+exports.uvCounters = function() {};
+exports.features = {};
+
+
+/***/ }),
+
 /***/ "4588":
 /***/ (function(module, exports) {
 
@@ -894,269 +1070,6 @@ module.exports = function (bitmap, value) {
 
 /***/ }),
 
-/***/ "499e":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-function addStylesClient (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-
 /***/ "4bf8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1165,6 +1078,22 @@ var defined = __webpack_require__("be13");
 module.exports = function (it) {
   return Object(defined(it));
 };
+
+
+/***/ }),
+
+/***/ "5176":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("51b6");
+
+/***/ }),
+
+/***/ "51b6":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("a3c3");
+module.exports = __webpack_require__("584a").Object.assign;
 
 
 /***/ }),
@@ -1256,24 +1185,60 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__("2d00") ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
 /***/ }),
 
-/***/ "5c2d":
+/***/ "5559":
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+var shared = __webpack_require__("dbdb")('keys');
+var uid = __webpack_require__("62a0");
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
 
-// load the styles
-var content = __webpack_require__("824c");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("55bb5b30", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
+/***/ "584a":
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.6.5' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "5b4e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject = __webpack_require__("36c3");
+var toLength = __webpack_require__("b447");
+var toAbsoluteIndex = __webpack_require__("0fc9");
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
 
 /***/ }),
 
@@ -1397,6 +1362,157 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 /***/ }),
 
+/***/ "62a0":
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
+
+/***/ "63b6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("e53d");
+var core = __webpack_require__("584a");
+var ctx = __webpack_require__("d864");
+var hide = __webpack_require__("35e8");
+var has = __webpack_require__("07e3");
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+
+/***/ }),
+
+/***/ "65b6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"553e40dc-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/optgroup.vue?vue&type=template&id=d4669654&scoped=true&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-optgroup",class:_vm.classes,style:({ 'padding-left': ((12 + 12 * _vm.group.state.depth) + "px") })},[_c('div',{staticClass:"label",domProps:{"innerHTML":_vm._s(_vm.group.label)}})])}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/optgroup.vue?vue&type=template&id=d4669654&scoped=true&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/optgroup.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var optgroupvue_type_script_lang_js_ = ({
+  name: 'VOptgroup',
+  props: {
+    group: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    aria: function aria() {
+      return {}; // What aria attributes are associated with optgroups?
+    },
+    classes: function classes() {
+      return {
+        'is-disabled': this.group.disabled
+      };
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/optgroup.vue?vue&type=script&lang=js&
+ /* harmony default export */ var src_optgroupvue_type_script_lang_js_ = (optgroupvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/optgroup.vue?vue&type=style&index=0&id=d4669654&lang=scss&scoped=true&
+var optgroupvue_type_style_index_0_id_d4669654_lang_scss_scoped_true_ = __webpack_require__("7336");
+
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/optgroup.vue
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  src_optgroupvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  "d4669654",
+  null
+  
+)
+
+/* harmony default export */ var optgroup = __webpack_exports__["a"] = (component.exports);
+
+/***/ }),
+
 /***/ "6821":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1440,44 +1556,14 @@ module.exports = function (it, S) {
 
 /***/ }),
 
-/***/ "7333":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "6b4c":
+/***/ (function(module, exports) {
 
-"use strict";
+var toString = {}.toString;
 
-// 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__("0d58");
-var gOPS = __webpack_require__("2621");
-var pIE = __webpack_require__("52a7");
-var toObject = __webpack_require__("4bf8");
-var IObject = __webpack_require__("626a");
-var $assign = Object.assign;
-
-// should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__("79e5")(function () {
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line no-undef
-  var S = Symbol();
-  var K = 'abcdefghijklmnopqrst';
-  A[S] = 7;
-  K.split('').forEach(function (k) { B[k] = k; });
-  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
-  var T = toObject(target);
-  var aLen = arguments.length;
-  var index = 1;
-  var getSymbols = gOPS.f;
-  var isEnum = pIE.f;
-  while (aLen > index) {
-    var S = IObject(arguments[index++]);
-    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
-  } return T;
-} : $assign;
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
 
 
 /***/ }),
@@ -1486,10 +1572,17 @@ module.exports = !$assign || __webpack_require__("79e5")(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("fdbe");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("872f");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_optgroup_vue_vue_type_style_index_0_id_d4669654_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "7414":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -1537,6 +1630,27 @@ var min = Math.min;
 module.exports = function (index, length) {
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+
+/***/ }),
+
+/***/ "794b":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = !__webpack_require__("8e60") && !__webpack_require__("294c")(function () {
+  return Object.defineProperty(__webpack_require__("1ec9")('div'), 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+
+/***/ "79aa":
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
 };
 
 
@@ -1591,56 +1705,11 @@ module.exports = function (it, tag, stat) {
 
 /***/ }),
 
-/***/ "7f35":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("84a4");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("0f2dbfb0", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
-/***/ "824c":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".v-option[data-v-665b5e94]{padding:8px 12px}.v-option.is-hovered[data-v-665b5e94]{background-color:#e5e5e5}.v-option.is-disabled[data-v-665b5e94]{cursor:default;opacity:.7}.v-option.is-highlighted[data-v-665b5e94]{color:#fff;background-color:#231e49}.label[data-v-665b5e94]{white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "8378":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.1' };
+var core = module.exports = { version: '2.6.5' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "84a4":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".v-option{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer}", ""]);
-
-// exports
 
 
 /***/ }),
@@ -1676,6 +1745,13 @@ exports.f = __webpack_require__("9e1e") ? Object.defineProperty : function defin
 
 /***/ }),
 
+/***/ "872f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "8b97":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1708,6 +1784,581 @@ module.exports = {
 
 /***/ }),
 
+/***/ "8e60":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__("294c")(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+
+/***/ "9001":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a481");
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("3b2b");
+/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("5176");
+/* harmony import */ var _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac6a");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("7514");
+/* harmony import */ var core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_find__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("c5f6");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _optgroup_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("65b6");
+/* harmony import */ var _option_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("affe");
+/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("b012");
+/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(debounce__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'VSelect',
+  props: {
+    options: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    option: {
+      type: Object,
+      default: function _default() {
+        return _option_vue__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"];
+      }
+    },
+    optgroup: {
+      type: Object,
+      default: function _default() {
+        return _optgroup_vue__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"];
+      }
+    },
+    size: {
+      type: Number,
+      default: 400
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    native: {
+      type: [Boolean, Function],
+      default: true
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: [String, Number],
+      default: null
+    }
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    // Set the complete list of option/optgroup data by "repairing"
+    // each provided option hash with the required/needed data
+    this.list = this.options.reduce(function (options, o) {
+      return options.concat(_this.getRepairedItem(o));
+    }, []);
+
+    if (this.selection) {
+      // One of the enabled options in the input json was selected
+      // Set the current highlight index to the selected options index
+      this.highlightIndex = this.selection.state.index;
+    } else if (this.value !== null) {
+      // If the selected prop was provided, try and find the selected option
+      // in the list of enabled options
+      var option = this.getAvailableOptions().find(function (o) {
+        return o.value == _this.value;
+      });
+
+      if (option) {
+        // A match was found, so set it as the selected & highlighted option
+        option.selected = true;
+        this.highlightIndex = option.state.index;
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    // When clicked anywhere, close the dropdown
+    // This event is prevented if the click occurs on the dropdown itself
+    document.addEventListener('click', function (event) {
+      if (!_this2.$el.contains(event.target)) {
+        _this2.onClickOutside();
+      }
+    }); // When a scroll event occurs anywhere except the dropdown itself,
+    // close the dropdown, but continue to re-position it as it scrolls
+    // The re-positioning is to take into account longer transition-out animations
+
+    window.addEventListener('scroll', function (event) {
+      _this2.calcPosition();
+
+      _this2.calcDirection();
+
+      if (_this2.open && !_this2.$el.contains(event.target)) _this2.open = false;
+    }, true);
+    this.calcPosition();
+    this.calcDirection();
+    this.calcDimensions();
+  },
+  updated: function updated() {
+    var _this3 = this;
+
+    this.$nextTick(function () {
+      _this3.calcPosition();
+
+      _this3.calcDirection();
+
+      _this3.calcDimensions();
+    });
+  },
+  watch: {
+    open: function open(is_open) {
+      // Unset the animation duration override, allow
+      // the written animation to take place
+      this.$refs.options.style.animationDuration = '';
+
+      if (is_open) {
+        this.calcPosition();
+        this.$nextTick(this.scrollToHighlighted);
+        this.$emit('open');
+      } else {
+        this.$emit('close');
+        this.hoverIndex = -1;
+      }
+    },
+    focused: function focused(is_focused) {
+      if (!is_focused) {
+        this.onToggle(false);
+      }
+    },
+    direction: function direction() {
+      this.$refs.options.style.animationDuration = '0s';
+    },
+    hoverIndex: function hoverIndex(new_index) {
+      this.getAvailableOptions().forEach(function (o) {
+        return o.state.hovered = o.state.index == new_index;
+      });
+    },
+    highlightIndex: function highlightIndex(new_index) {
+      this.getAvailableOptions().forEach(function (o) {
+        return o.state.highlighted = o.state.index == new_index;
+      });
+    },
+    selection: function selection(new_selection) {
+      if (this.selections === undefined) {
+        var value = new_selection ? new_selection.value : '';
+        this.$emit('input', value);
+        this.$emit('change', value);
+      }
+    }
+  },
+  methods: {
+    /**
+     * Generates the native select elements inner html options
+     * This is only used if on a mobile device and +this.native+ is true
+     */
+    getOptionsHtml: function getOptionsHtml() {
+      var html = '';
+      var grouped = false;
+      this.list.forEach(function (item) {
+        if (item.state.group) {
+          if (grouped) {
+            html += '</optgroup>';
+          }
+
+          grouped = true;
+          html += "<optgroup label=\"".concat(item.label, "\" ").concat(item.disabled ? 'disabled' : '', ">");
+        } else {
+          if (grouped && item.state.groups.length == 0) {
+            html += '</optgroup>';
+            grouped = false;
+          }
+
+          html += "<option value=\"".concat(item.value, "\" ").concat(item.disabled ? 'disabled' : '', " ").concat(item.selected ? 'selected' : '', ">").concat(item.label, "</option>");
+        }
+      });
+      if (grouped) html += '</optgroup>';
+      return html;
+    },
+    getAvailableSpace: function getAvailableSpace() {
+      var location = this.$el.getBoundingClientRect();
+      var top = location.y;
+      var bottom = window.innerHeight - (location.y + location.height);
+      return {
+        top: top,
+        bottom: bottom
+      };
+    },
+    calcDimensions: function calcDimensions() {
+      if (this.$refs.options) {
+        var initialDisplay = this.$refs.options.style.display;
+        var initialMinWidth = this.$refs.options.style.minWidth;
+        this.$refs.options.style.minWidth = '0';
+        this.$refs.options.style.position = 'absolute';
+        this.$refs.options.style.display = 'inline-block';
+        this.width = Math.max(this.$refs.options.offsetWidth, this.$el.offsetWidth);
+        this.$refs.options.style.display = initialDisplay;
+        this.$refs.options.style.minWidth = initialMinWidth;
+        this.$refs.options.style.position = '';
+      }
+    },
+    calcPosition: function calcPosition() {
+      var location = this.$el.getBoundingClientRect();
+      var space = this.getAvailableSpace(); // Prefer to open downwards if there is enough room,
+      // regardless of whether top has more available space
+      // Include 30px margin space, so we don't open right to the edge
+
+      if (space.bottom >= space.top || space.bottom - 30 > this.$refs.options.offsetHeight) {
+        this.height = Math.min(space.bottom, this.size + 30) - 30;
+        this.top = location.y;
+      } else {
+        this.height = Math.min(space.top, this.size + 30) - 30;
+        this.top = location.y - this.$refs.label.offsetHeight - this.$refs.options.offsetHeight;
+      }
+
+      this.left = location.x;
+    },
+    calcDirection: Object(debounce__WEBPACK_IMPORTED_MODULE_8__["debounce"])(function () {
+      var space = this.getAvailableSpace();
+      this.direction = space.bottom >= space.top || space.bottom - 30 > this.$refs.options.offsetHeight ? 'is-down' : 'is-up';
+    }, 200),
+    getRepairedItem: function getRepairedItem(option, depth, attrs) {
+      var _this4 = this;
+
+      // Set a default depth of zero
+      if (!depth) depth = 0; // Ensure any extra attributes is an object, even if empty
+
+      if (!attrs) attrs = {}; // Initialize the counter that will be incremented to track
+      // the index of each option or optgroup
+
+      if (isNaN(this.counter)) this.counter = 0; // Begin with a common set of state attributes
+
+      var state = _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()({
+        groups: []
+      }, attrs.state || {}, {
+        depth: depth,
+        index: this.counter++
+      });
+
+      if (option.options) {
+        // Our "option" has it's own set of options: therefore it's actually an optgroup
+        // Give our group an id (really just the index in the groups array)
+        // and a flag indicating it's an option group
+        var group = _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()({
+          label: '',
+          disabled: false
+        }, option, attrs, {
+          state: _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()(state, {
+            group_id: this.groups.length,
+            group: true
+          })
+        }); // Add our new group the groups array
+
+
+        this.groups.push(group); // Update the list of group ids this option/group belongs to, it will be passed to every child option/group
+
+        var groupParams = {
+          state: {
+            groups: state.groups.concat([this.groups.length - 1])
+          } // If the group itself is disabled, force all children to be disabled as well
+
+        };
+        if (group.disabled) groupParams.disabled = true; // Get an array of child "options", flattened
+        // This array may also contain other option groups
+
+        var options = group.options.reduce(function (options, o) {
+          return options.concat(_this4.getRepairedItem(o, depth + 1, groupParams));
+        }, []); // Delete the original reference to options from our input data
+
+        delete group.options; // Place the optgroup before it's children
+
+        options.unshift(group);
+        return options;
+      } else {
+        // Our option is just an option, merge in some default state attributes
+        // and normalize the rest of the data
+        attrs.state = _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()(state, {
+          highlighted: false,
+          hovered: false
+        });
+        return _home_ehainer_Vue_DesignStandard_select_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_2___default()({
+          value: '',
+          label: '',
+          item: option.label || '',
+          selected: false,
+          disabled: false
+        }, option, attrs);
+      }
+    },
+    onArrowPress: function onArrowPress(offset) {
+      // If not seeking, add the class
+      if (!this.$el.classList.contains('is-seeking')) {
+        this.$el.classList.add('is-seeking');
+      }
+
+      var permitted = this.getAvailableOptions().map(function (o) {
+        return o.state.index;
+      }); // `resetHover` uses `debounce`, so it only is called after 100ms
+      // Each call to `resetHover` actually resets the clock
+
+      this.resetHover();
+
+      if (this.highlightIndex < 0 && this.hoverIndex < 0) {
+        // If nothing is highlighted or hovered, highlight the first available option
+        this.highlightIndex = permitted[0];
+      } else if (this.highlightIndex < 0 && this.hoverIndex >= 0) {
+        // If hovering over an option, that option should be highlighted
+        this.highlightIndex = this.hoverIndex;
+      } else {
+        // Ensure our hoverIndex is the same as highlightIndex if not set already
+        if (this.highlightIndex > -1 && this.hoverIndex < 0) this.hoverIndex = this.highlightIndex; // Moving up or down the list, find the next option by the offset given
+
+        var nextIndex = permitted[permitted.indexOf(this.hoverIndex) + offset];
+        if (!isNaN(nextIndex)) this.highlightIndex = nextIndex;
+      } // Consider that highlighting in this context is the same as hovering
+
+
+      this.hoverIndex = this.highlightIndex;
+
+      if (this.open) {
+        // Dropdown is open, so make sure our newly highlighted option is in view
+        this.$nextTick(this.scrollToHighlighted);
+      } else {
+        // Dropdown is closed, so we actually mean to change the selection
+        this.onClickOption(this.highlightIndex);
+      }
+    },
+    onFilter: function onFilter(event) {
+      var code = event.keyCode || event.which;
+      var char = String.fromCharCode(code);
+
+      if (/[a-z0-9-_ ]/i.test(char)) {
+        this.filter += char;
+        var match = new RegExp("^".concat(this.filter), 'i');
+        var tmp = document.createElement('DIV');
+        var result = this.list.filter(function (o) {
+          return !o.state.group && !o.disabled;
+        }).find(function (o) {
+          tmp.innerHTML = o.item;
+          var text = (tmp.textContent || tmp.innerText || o.item).replace(/^\s+/, '');
+          return match.test(text);
+        });
+
+        if (result) {
+          this.onClickOption(result.state.index, this.open);
+        }
+      }
+
+      this.resetFilter();
+    },
+    onHover: function onHover(idx) {
+      var option = this.list.find(function (o) {
+        return o.state.index === idx;
+      });
+      if (!option || option.disabled) return;
+      this.hoverIndex = idx;
+    },
+    onTab: function onTab(event) {
+      if (this.open && this.focused) {
+        event.preventDefault();
+        this.selectImpliedOption();
+        this.open = false;
+      }
+    },
+    onEnter: function onEnter() {
+      this.selectImpliedOption();
+      this.open = false;
+    },
+    onEscape: function onEscape() {
+      this.open = false;
+    },
+    onToggle: function onToggle(override) {
+      if (this.disabled) return;
+      this.open = override == undefined ? !this.open : override;
+    },
+    onToggleFocus: function onToggleFocus(state) {
+      if (this.disabled) return;
+      this.focused = state;
+    },
+    onClickOutside: function onClickOutside() {
+      // If already closed, lose focus also
+      if (!this.open) this.focused = false;
+      this.open = false;
+    },
+
+    /**
+     * Set the current selected option to the given index,
+     * and highlight it as well. The second parameter can be a truthy/falsy
+     * indicating whether or not to close the dropdown after selecting
+     */
+    onClickOption: function onClickOption(idx, close) {
+      var _this5 = this;
+
+      this.getAvailableOptions().forEach(function (o) {
+        return o.selected = o.state.index == idx;
+      });
+      this.highlightIndex = idx;
+      this.$nextTick(function () {
+        _this5.scrollToHighlighted();
+      });
+      this.open = !!close;
+    },
+
+    /**
+     * When the native select input value changes,
+     * find the index of the option from the value
+     * and update the selected option in the data +list+
+     */
+    onSelectChanged: function onSelectChanged(event) {
+      var option = this.getAvailableOptions().find(function (o) {
+        return o.value == event.target.value;
+      });
+      if (option) this.onClickOption(option.state.index);
+    },
+
+    /**
+     * Implied option is first and foremost the option that
+     * currently is highlighted. If no option is highlighted,
+     * fall back to the currently hovered option, if any.
+     * If no options with either hover or highlight state, does nothing
+     */
+    selectImpliedOption: function selectImpliedOption() {
+      if (this.highlightIndex > -1) {
+        this.onClickOption(this.highlightIndex, true);
+      } else if (this.hoverIndex > -1) {
+        this.onClickOption(this.hoverIndex, true);
+      }
+    },
+    scrollToHighlighted: function scrollToHighlighted() {
+      var highlighted = this.$refs.options.querySelector('.is-highlighted');
+      var options = this.$refs.scroll || this.$refs.options;
+
+      if (highlighted) {
+        var optionBottom = highlighted.offsetTop - options.offsetHeight + highlighted.offsetHeight + options.offsetHeight;
+        var scrollBottom = options.scrollTop + options.offsetHeight;
+
+        if (optionBottom >= scrollBottom) {
+          options.scrollTop = highlighted.offsetTop - options.offsetHeight + highlighted.offsetHeight;
+        } else if (highlighted.offsetTop < options.scrollTop) {
+          options.scrollTop = highlighted.offsetTop;
+        }
+      }
+    },
+    hasAvailableOptions: function hasAvailableOptions() {
+      return this.getAvailableOptions().length > 0;
+    },
+    getAvailableOptions: function getAvailableOptions() {
+      return this.list.filter(function (o) {
+        return !o.state.group && !o.disabled;
+      });
+    },
+    isMobile: function isMobile() {
+      var agent = process.client ? navigator.userAgent : null;
+
+      if (this.native instanceof Function) {
+        return this.native(agent);
+      }
+
+      return this.native && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(agent);
+    },
+    resetFilter: Object(debounce__WEBPACK_IMPORTED_MODULE_8__["debounce"])(function () {
+      this.filter = '';
+    }, 500),
+    resetHover: Object(debounce__WEBPACK_IMPORTED_MODULE_8__["debounce"])(function () {
+      this.$el.classList.remove('is-seeking');
+    }, 100)
+  },
+  computed: {
+    classes: function classes() {
+      return [{
+        'is-focused': this.focused
+      }, {
+        'is-disabled': this.disabled
+      }, {
+        'is-open': this.open
+      }, {
+        'is-mobile': this.isMobile()
+      }, {
+        'is-placeholding': !this.selection
+      }, this.direction];
+    },
+    variables: function variables() {
+      return {
+        '--height': "".concat(this.height, "px"),
+        '--width': this.width == 'auto' ? 'auto' : "".concat(this.width, "px"),
+        '--top': "".concat(this.top + (this.$refs.label ? this.$refs.label.offsetHeight : 0), "px"),
+        '--left': "".concat(this.left, "px")
+      };
+    },
+    selection: function selection() {
+      return this.list.find(function (o) {
+        return !o.state.group && !o.disabled && o.selected;
+      });
+    },
+    label: function label() {
+      if (this.highlighted) {
+        return this.highlighted.label;
+      }
+
+      return null;
+    },
+    highlighted: function highlighted() {
+      return this.list.find(function (o) {
+        return o.state.highlighted;
+      });
+    }
+  },
+  data: function data() {
+    return {
+      open: false,
+      focused: false,
+      width: 'auto',
+      list: [],
+      groups: [],
+      hoverIndex: -1,
+      highlightIndex: -1,
+      filter: '',
+      top: 0,
+      left: 0,
+      height: this.size,
+      direction: 'is-down'
+    };
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
+
+/***/ }),
+
 /***/ "9093":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1722,14 +2373,64 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 /***/ }),
 
+/***/ "9306":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 19.1.2.1 Object.assign(target, source, ...)
+var getKeys = __webpack_require__("c3a1");
+var gOPS = __webpack_require__("9aa9");
+var pIE = __webpack_require__("355d");
+var toObject = __webpack_require__("241e");
+var IObject = __webpack_require__("335c");
+var $assign = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+module.exports = !$assign || __webpack_require__("294c")(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function (k) { B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
+  } return T;
+} : $assign;
+
+
+/***/ }),
+
 /***/ "9437":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5c2d");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b11c");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_option_vue_vue_type_style_index_0_id_665b5e94_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "9aa9":
+/***/ (function(module, exports) {
+
+exports.f = Object.getOwnPropertySymbols;
+
 
 /***/ }),
 
@@ -1794,6 +2495,17 @@ module.exports = function (it) {
 module.exports = !__webpack_require__("79e5")(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
+
+
+/***/ }),
+
+/***/ "a3c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.3.1 Object.assign(target, source)
+var $export = __webpack_require__("63b6");
+
+$export($export.S + $export.F, 'Object', { assign: __webpack_require__("9306") });
 
 
 /***/ }),
@@ -1907,12 +2619,12 @@ __webpack_require__("214f")('replace', 2, function (defined, REPLACE, $replace, 
           break;
         default: // \d\d?
           var n = +ch;
-          if (n === 0) return ch;
+          if (n === 0) return match;
           if (n > m) {
             var f = floor(n / 10);
-            if (f === 0) return ch;
+            if (f === 0) return match;
             if (f <= m) return captures[f - 1] === undefined ? ch.charAt(1) : captures[f - 1] + ch.charAt(1);
-            return ch;
+            return match;
           }
           capture = captures[n - 1];
       }
@@ -1973,6 +2685,17 @@ module.exports = function (it) {
   return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : cof(it) == 'RegExp');
 };
 
+
+/***/ }),
+
+/***/ "abb0":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_81febee0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("bf74");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_81febee0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_81febee0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_select_vue_vue_type_style_index_0_id_81febee0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -2038,6 +2761,99 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
   }
 }
 
+
+/***/ }),
+
+/***/ "aebd":
+/***/ (function(module, exports) {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+
+/***/ "affe":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"553e40dc-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/option.vue?vue&type=template&id=665b5e94&scoped=true&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',_vm._b({staticClass:"v-option",class:_vm.classes,style:({ 'padding-left': ((12 + 12 * _vm.option.state.depth) + "px") }),attrs:{"role":"option"}},'div',_vm.aria,false),[_c('div',{staticClass:"label",domProps:{"innerHTML":_vm._s(_vm.option.item)}})])}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/option.vue?vue&type=template&id=665b5e94&scoped=true&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/option.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var optionvue_type_script_lang_js_ = ({
+  name: 'VOption',
+  props: {
+    option: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    aria: function aria() {
+      return {
+        'aria-disabled': this.option.disabled,
+        // The selected attribute should show no matter what,
+        // so we provide the value in an always "truthy" format (aka string)
+        'aria-selected': this.option.selected ? 'true' : 'false'
+      };
+    },
+    classes: function classes() {
+      return {
+        'is-disabled': this.option.disabled,
+        'is-selected': this.option.selected,
+        'is-highlighted': this.option.state.highlighted,
+        'is-hovered': this.option.state.hovered
+      };
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/option.vue?vue&type=script&lang=js&
+ /* harmony default export */ var src_optionvue_type_script_lang_js_ = (optionvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/option.vue?vue&type=style&index=0&id=665b5e94&lang=scss&scoped=true&
+var optionvue_type_style_index_0_id_665b5e94_lang_scss_scoped_true_ = __webpack_require__("9437");
+
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/option.vue
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  src_optionvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  "665b5e94",
+  null
+  
+)
+
+/* harmony default export */ var src_option = __webpack_exports__["a"] = (component.exports);
 
 /***/ }),
 
@@ -2135,6 +2951,34 @@ __webpack_require__("5ca1")({
 
 /***/ }),
 
+/***/ "b11c":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "b447":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.15 ToLength
+var toInteger = __webpack_require__("3a38");
+var min = Math.min;
+module.exports = function (it) {
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+
+/***/ }),
+
+/***/ "b8e3":
+/***/ (function(module, exports) {
+
+module.exports = true;
+
+
+/***/ }),
+
 /***/ "be13":
 /***/ (function(module, exports) {
 
@@ -2144,6 +2988,13 @@ module.exports = function (it) {
   return it;
 };
 
+
+/***/ }),
+
+/***/ "bf74":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -2172,6 +3023,20 @@ module.exports = function (IS_INCLUDES) {
       if (O[index] === el) return IS_INCLUDES || index || 0;
     } return !IS_INCLUDES && -1;
   };
+};
+
+
+/***/ }),
+
+/***/ "c3a1":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__("e6f3");
+var enumBugKeys = __webpack_require__("1691");
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
 };
 
 
@@ -2387,6 +3252,33 @@ module.exports = function (done, value) {
 
 /***/ }),
 
+/***/ "d864":
+/***/ (function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__("79aa");
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+
+/***/ }),
+
 /***/ "d8e8":
 /***/ (function(module, exports) {
 
@@ -2395,6 +3287,280 @@ module.exports = function (it) {
   return it;
 };
 
+
+/***/ }),
+
+/***/ "d9f6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__("e4ae");
+var IE8_DOM_DEFINE = __webpack_require__("794b");
+var toPrimitive = __webpack_require__("1bc3");
+var dP = Object.defineProperty;
+
+exports.f = __webpack_require__("8e60") ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+
+/***/ }),
+
+/***/ "dbdb":
+/***/ (function(module, exports, __webpack_require__) {
+
+var core = __webpack_require__("584a");
+var global = __webpack_require__("e53d");
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: core.version,
+  mode: __webpack_require__("b8e3") ? 'pure' : 'global',
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
+});
+
+
+/***/ }),
+
+/***/ "df7c":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// Split a filename into [root, dir, basename, ext], unix version
+// 'root' is just a slash, or nothing.
+var splitPathRe =
+    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+var splitPath = function(filename) {
+  return splitPathRe.exec(filename).slice(1);
+};
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function(path) {
+  var result = splitPath(path),
+      root = result[0],
+      dir = result[1];
+
+  if (!root && !dir) {
+    // No dirname whatsoever
+    return '.';
+  }
+
+  if (dir) {
+    // It has a dirname, strip trailing slash
+    dir = dir.substr(0, dir.length - 1);
+  }
+
+  return root + dir;
+};
+
+
+exports.basename = function(path, ext) {
+  var f = splitPath(path)[2];
+  // TODO: make this comparison case-insensitive on windows?
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+
+exports.extname = function(path) {
+  return splitPath(path)[3];
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
 
 /***/ }),
 
@@ -2409,17 +3575,51 @@ module.exports = (
 
 /***/ }),
 
-/***/ "e2ca":
+/***/ "e4ae":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
+var isObject = __webpack_require__("f772");
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
 
 
-// module
-exports.push([module.i, ".v-optgroup[data-v-d4669654]{padding:8px 12px}.v-optgroup.is-disabled[data-v-d4669654]{opacity:.7}.label[data-v-d4669654]{white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}", ""]);
+/***/ }),
 
-// exports
+/***/ "e53d":
+/***/ (function(module, exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "e6f3":
+/***/ (function(module, exports, __webpack_require__) {
+
+var has = __webpack_require__("07e3");
+var toIObject = __webpack_require__("36c3");
+var arrayIndexOf = __webpack_require__("5b4e")(false);
+var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
 
 
 /***/ }),
@@ -2447,13 +3647,20 @@ module.exports = function (original) {
 
 /***/ }),
 
-/***/ "f751":
+/***/ "f772":
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+
+/***/ }),
+
+/***/ "fa5b":
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__("5ca1");
-
-$export($export.S + $export.F, 'Object', { assign: __webpack_require__("7333") });
+module.exports = __webpack_require__("5537")('native-function-to-string', Function.toString);
 
 
 /***/ }),
@@ -2486,798 +3693,26 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/select.vue?vue&type=template&id=56fe985c&scoped=true&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-select",class:_vm.classes,style:(_vm.variables),attrs:{"role":"listbox","tabindex":"0"},on:{"click":function($event){$event.stopPropagation();},"keydown":[function($event){_vm.onFilter($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }_vm.onEnter()},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"tab",9,$event.key,"Tab")){ return null; }_vm.onTab($event)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }$event.preventDefault();_vm.onArrowPress(-1)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }$event.preventDefault();_vm.onArrowPress(1)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }$event.preventDefault();_vm.onArrowPress(-1)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }$event.preventDefault();_vm.onArrowPress(1)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();_vm.onToggle(true)},function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }_vm.onEscape()}],"focus":function($event){_vm.onToggleFocus(true)},"blur":function($event){_vm.onToggleFocus(false)}}},[_c('div',{ref:"label",staticClass:"label",domProps:{"innerHTML":_vm._s(_vm.label || _vm.placeholder)},on:{"click":function($event){$event.preventDefault();_vm.onToggle()}}}),_c('div',{ref:"options",staticClass:"options",staticStyle:{"animation-duration":"0s"},attrs:{"aria-hidden":!_vm.open}},[_vm._l((_vm.list),function(opt){return [(opt.state.group)?_c(_vm.optgroup,{key:opt.state.index,tag:"component",attrs:{"group":opt}}):_c(_vm.option,{key:opt.state.index,tag:"component",attrs:{"option":opt},nativeOn:{"click":function($event){$event.stopPropagation();_vm.onClickOption(opt.state.index)},"mouseover":function($event){_vm.onHover(opt.state.index)}}})]})],2),_c('select',{ref:"select",staticClass:"select",attrs:{"tabindex":"-1"},domProps:{"innerHTML":_vm._s(_vm.getOptionsHtml())},on:{"change":function($event){_vm.onSelectChanged($event)}}})])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"553e40dc-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/select.vue?vue&type=template&id=81febee0&scoped=true&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-select",class:_vm.classes,style:(_vm.variables),attrs:{"role":"listbox","tabindex":"0"},on:{"click":function($event){$event.stopPropagation();},"keydown":[function($event){return _vm.onFilter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.onEnter()},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"tab",9,$event.key,"Tab")){ return null; }return _vm.onTab($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }$event.preventDefault();return _vm.onArrowPress(-1)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }$event.preventDefault();return _vm.onArrowPress(1)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"left",37,$event.key,["Left","ArrowLeft"])){ return null; }if('button' in $event && $event.button !== 0){ return null; }$event.preventDefault();return _vm.onArrowPress(-1)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"right",39,$event.key,["Right","ArrowRight"])){ return null; }if('button' in $event && $event.button !== 2){ return null; }$event.preventDefault();return _vm.onArrowPress(1)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.onToggle(true)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.onEscape()}],"focus":function($event){return _vm.onToggleFocus(true)},"blur":function($event){return _vm.onToggleFocus(false)}}},[_c('div',{ref:"label",staticClass:"label",domProps:{"innerHTML":_vm._s(_vm.label || _vm.placeholder)},on:{"click":function($event){$event.preventDefault();return _vm.onToggle()}}}),_c('div',{ref:"options",staticClass:"options",staticStyle:{"animation-duration":"0s"},attrs:{"aria-hidden":!_vm.open}},[_vm._l((_vm.list),function(opt){return [(opt.state.group)?_c(_vm.optgroup,{key:opt.state.index,tag:"component",attrs:{"group":opt}}):_c(_vm.option,{key:opt.state.index,tag:"component",attrs:{"option":opt},nativeOn:{"click":function($event){$event.stopPropagation();return _vm.onClickOption(opt.state.index)},"mouseover":function($event){return _vm.onHover(opt.state.index)}}})]})],2),_c('select',{ref:"select",staticClass:"select",attrs:{"tabindex":"-1"},domProps:{"innerHTML":_vm._s(_vm.getOptionsHtml())},on:{"change":function($event){return _vm.onSelectChanged($event)}}})])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/select.vue?vue&type=template&id=56fe985c&scoped=true&
+// CONCATENATED MODULE: ./src/select.vue?vue&type=template&id=81febee0&scoped=true&
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/select.vue?vue&type=script&lang=js&
+var selectvue_type_script_lang_js_ = __webpack_require__("9001");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
-var es6_regexp_constructor = __webpack_require__("3b2b");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
-var web_dom_iterable = __webpack_require__("ac6a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.find.js
-var es6_array_find = __webpack_require__("7514");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
-var es6_number_constructor = __webpack_require__("c5f6");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/optgroup.vue?vue&type=template&id=d4669654&scoped=true&
-var optgroupvue_type_template_id_d4669654_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-optgroup",class:_vm.classes,style:({ 'padding-left': ((12 + 12 * _vm.group.state.depth) + "px") })},[_c('div',{staticClass:"label",domProps:{"innerHTML":_vm._s(_vm.group.label)}})])}
-var optgroupvue_type_template_id_d4669654_scoped_true_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/optgroup.vue?vue&type=template&id=d4669654&scoped=true&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/optgroup.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var optgroupvue_type_script_lang_js_ = ({
-  name: 'VOptgroup',
-  props: {
-    group: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    aria: function aria() {
-      return {}; // What aria attributes are associated with optgroups?
-    },
-    classes: function classes() {
-      return {
-        'is-disabled': this.group.disabled
-      };
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/optgroup.vue?vue&type=script&lang=js&
- /* harmony default export */ var src_optgroupvue_type_script_lang_js_ = (optgroupvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/optgroup.vue?vue&type=style&index=0&id=d4669654&lang=scss&scoped=true&
-var optgroupvue_type_style_index_0_id_d4669654_lang_scss_scoped_true_ = __webpack_require__("7336");
-
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-// CONCATENATED MODULE: ./src/optgroup.vue
-
-
-
-
-
-
-/* normalize component */
-
-var component = normalizeComponent(
-  src_optgroupvue_type_script_lang_js_,
-  optgroupvue_type_template_id_d4669654_scoped_true_render,
-  optgroupvue_type_template_id_d4669654_scoped_true_staticRenderFns,
-  false,
-  null,
-  "d4669654",
-  null
-  
-)
-
-component.options.__file = "optgroup.vue"
-/* harmony default export */ var optgroup = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/option.vue?vue&type=template&id=665b5e94&scoped=true&
-var optionvue_type_template_id_665b5e94_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',_vm._b({staticClass:"v-option",class:_vm.classes,style:({ 'padding-left': ((12 + 12 * _vm.option.state.depth) + "px") }),attrs:{"role":"option"}},'div',_vm.aria,false),[_c('div',{staticClass:"label",domProps:{"innerHTML":_vm._s(_vm.option.item)}})])}
-var optionvue_type_template_id_665b5e94_scoped_true_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/option.vue?vue&type=template&id=665b5e94&scoped=true&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/option.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var optionvue_type_script_lang_js_ = ({
-  name: 'VOption',
-  props: {
-    option: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    aria: function aria() {
-      return {
-        'aria-disabled': this.option.disabled,
-        // The selected attribute should show no matter what,
-        // so we provide the value in an always "truthy" format (aka string)
-        'aria-selected': this.option.selected ? 'true' : 'false'
-      };
-    },
-    classes: function classes() {
-      return {
-        'is-disabled': this.option.disabled,
-        'is-selected': this.option.selected,
-        'is-highlighted': this.option.state.highlighted,
-        'is-hovered': this.option.state.hovered
-      };
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/option.vue?vue&type=script&lang=js&
- /* harmony default export */ var src_optionvue_type_script_lang_js_ = (optionvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/option.vue?vue&type=style&index=0&id=665b5e94&lang=scss&scoped=true&
-var optionvue_type_style_index_0_id_665b5e94_lang_scss_scoped_true_ = __webpack_require__("9437");
-
-// CONCATENATED MODULE: ./src/option.vue
-
-
-
-
-
-
-/* normalize component */
-
-var option_component = normalizeComponent(
-  src_optionvue_type_script_lang_js_,
-  optionvue_type_template_id_665b5e94_scoped_true_render,
-  optionvue_type_template_id_665b5e94_scoped_true_staticRenderFns,
-  false,
-  null,
-  "665b5e94",
-  null
-  
-)
-
-option_component.options.__file = "option.vue"
-/* harmony default export */ var src_option = (option_component.exports);
-// EXTERNAL MODULE: ./node_modules/debounce/index.js
-var debounce = __webpack_require__("b012");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/select.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ var selectvue_type_script_lang_js_ = ({
-  name: 'VSelect',
-  props: {
-    options: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    option: {
-      type: Object,
-      default: function _default() {
-        return src_option;
-      }
-    },
-    optgroup: {
-      type: Object,
-      default: function _default() {
-        return optgroup;
-      }
-    },
-    size: {
-      type: Number,
-      default: 400
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    native: {
-      type: [Boolean, Function],
-      default: true
-    },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    value: {
-      type: [String, Number],
-      default: null
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    // Set the complete list of option/optgroup data by "repairing"
-    // each provided option hash with the required/needed data
-    this.list = this.options.reduce(function (options, o) {
-      return options.concat(_this.getRepairedItem(o));
-    }, []);
-
-    if (this.selection) {
-      // One of the enabled options in the input json was selected
-      // Set the current highlight index to the selected options index
-      this.highlightIndex = this.selection.state.index;
-    } else if (this.value !== null) {
-      // If the selected prop was provided, try and find the selected option
-      // in the list of enabled options
-      var option = this.getAvailableOptions().find(function (o) {
-        return o.value == _this.value;
-      });
-
-      if (option) {
-        // A match was found, so set it as the selected & highlighted option
-        option.selected = true;
-        this.highlightIndex = option.state.index;
-      }
-    }
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    // When clicked anywhere, close the dropdown
-    // This event is prevented if the click occurs on the dropdown itself
-    document.addEventListener('click', function (event) {
-      if (!_this2.$el.contains(event.target)) {
-        _this2.onClickOutside();
-      }
-    }); // When a scroll event occurs anywhere except the dropdown itself,
-    // close the dropdown, but continue to re-position it as it scrolls
-    // The re-positioning is to take into account longer transition-out animations
-
-    window.addEventListener('scroll', function (event) {
-      _this2.calcPosition();
-
-      _this2.calcDirection();
-
-      if (_this2.open && !_this2.$el.contains(event.target)) _this2.open = false;
-    }, true);
-    this.calcPosition();
-    this.calcDirection();
-    this.calcDimensions();
-  },
-  updated: function updated() {
-    var _this3 = this;
-
-    this.$nextTick(function () {
-      _this3.calcPosition();
-
-      _this3.calcDirection();
-
-      _this3.calcDimensions();
-    });
-  },
-  watch: {
-    open: function open(is_open) {
-      // Unset the animation duration override, allow
-      // the written animation to take place
-      this.$refs.options.style.animationDuration = '';
-
-      if (is_open) {
-        this.calcPosition();
-        this.$nextTick(this.scrollToHighlighted);
-        this.$emit('open');
-      } else {
-        this.$emit('close');
-        this.hoverIndex = -1;
-      }
-    },
-    focused: function focused(is_focused) {
-      if (!is_focused) {
-        this.onToggle(false);
-      }
-    },
-    direction: function direction() {
-      this.$refs.options.style.animationDuration = '0s';
-    },
-    hoverIndex: function hoverIndex(new_index) {
-      this.getAvailableOptions().forEach(function (o) {
-        return o.state.hovered = o.state.index == new_index;
-      });
-    },
-    highlightIndex: function highlightIndex(new_index) {
-      this.getAvailableOptions().forEach(function (o) {
-        return o.state.highlighted = o.state.index == new_index;
-      });
-    },
-    selection: function selection(new_selection) {
-      if (this.selections === undefined) {
-        var value = new_selection ? new_selection.value : '';
-        this.$emit('input', value);
-        this.$emit('change', value);
-      }
-    }
-  },
-  methods: {
-    /**
-     * Generates the native select elements inner html options
-     * This is only used if on a mobile device and +this.native+ is true
-     */
-    getOptionsHtml: function getOptionsHtml() {
-      var html = '';
-      var grouped = false;
-      this.list.forEach(function (item) {
-        if (item.state.group) {
-          if (grouped) {
-            html += '</optgroup>';
-          }
-
-          grouped = true;
-          html += "<optgroup label=\"".concat(item.label, "\" ").concat(item.disabled ? 'disabled' : '', ">");
-        } else {
-          if (grouped && item.state.groups.length == 0) {
-            html += '</optgroup>';
-            grouped = false;
-          }
-
-          html += "<option value=\"".concat(item.value, "\" ").concat(item.disabled ? 'disabled' : '', " ").concat(item.selected ? 'selected' : '', ">").concat(item.label, "</option>");
-        }
-      });
-      if (grouped) html += '</optgroup>';
-      return html;
-    },
-    getAvailableSpace: function getAvailableSpace() {
-      var location = this.$el.getBoundingClientRect();
-      var top = location.y;
-      var bottom = window.innerHeight - (location.y + location.height);
-      return {
-        top: top,
-        bottom: bottom
-      };
-    },
-    calcDimensions: function calcDimensions() {
-      if (this.$refs.options) {
-        var initialDisplay = this.$refs.options.style.display;
-        var initialMinWidth = this.$refs.options.style.minWidth;
-        this.$refs.options.style.minWidth = '0';
-        this.$refs.options.style.position = 'absolute';
-        this.$refs.options.style.display = 'inline-block';
-        this.width = Math.max(this.$refs.options.offsetWidth, this.$el.offsetWidth);
-        this.$refs.options.style.display = initialDisplay;
-        this.$refs.options.style.minWidth = initialMinWidth;
-        this.$refs.options.style.position = '';
-      }
-    },
-    calcPosition: function calcPosition() {
-      var location = this.$el.getBoundingClientRect();
-      var space = this.getAvailableSpace(); // Prefer to open downwards if there is enough room,
-      // regardless of whether top has more available space
-      // Include 30px margin space, so we don't open right to the edge
-
-      if (space.bottom >= space.top || space.bottom - 30 > this.$refs.options.offsetHeight) {
-        this.height = Math.min(space.bottom, this.size + 30) - 30;
-        this.top = location.y;
-      } else {
-        this.height = Math.min(space.top, this.size + 30) - 30;
-        this.top = location.y - this.$refs.label.offsetHeight - this.$refs.options.offsetHeight;
-      }
-
-      this.left = location.x;
-    },
-    calcDirection: Object(debounce["debounce"])(function () {
-      var space = this.getAvailableSpace();
-      this.direction = space.bottom >= space.top || space.bottom - 30 > this.$refs.options.offsetHeight ? 'is-down' : 'is-up';
-    }, 200),
-    getRepairedItem: function getRepairedItem(option, depth, attrs) {
-      var _this4 = this;
-
-      // Set a default depth of zero
-      if (!depth) depth = 0; // Ensure any extra attributes is an object, even if empty
-
-      if (!attrs) attrs = {}; // Initialize the counter that will be incremented to track
-      // the index of each option or optgroup
-
-      if (isNaN(this.counter)) this.counter = 0; // Begin with a common set of state attributes
-
-      var state = Object.assign({
-        groups: []
-      }, attrs.state || {}, {
-        depth: depth,
-        index: this.counter++
-      });
-
-      if (option.options) {
-        // Our "option" has it's own set of options: therefore it's actually an optgroup
-        // Give our group an id (really just the index in the groups array)
-        // and a flag indicating it's an option group
-        var group = Object.assign({
-          label: '',
-          disabled: false
-        }, option, attrs, {
-          state: Object.assign(state, {
-            group_id: this.groups.length,
-            group: true
-          })
-        }); // Add our new group the groups array
-
-        this.groups.push(group); // Update the list of group ids this option/group belongs to, it will be passed to every child option/group
-
-        var groupParams = {
-          state: {
-            groups: state.groups.concat([this.groups.length - 1])
-          } // If the group itself is disabled, force all children to be disabled as well
-
-        };
-        if (group.disabled) groupParams.disabled = true; // Get an array of child "options", flattened
-        // This array may also contain other option groups
-
-        var options = group.options.reduce(function (options, o) {
-          return options.concat(_this4.getRepairedItem(o, depth + 1, groupParams));
-        }, []); // Delete the original reference to options from our input data
-
-        delete group.options; // Place the optgroup before it's children
-
-        options.unshift(group);
-        return options;
-      } else {
-        // Our option is just an option, merge in some default state attributes
-        // and normalize the rest of the data
-        attrs.state = Object.assign(state, {
-          highlighted: false,
-          hovered: false
-        });
-        return Object.assign({
-          value: '',
-          label: '',
-          item: option.label || '',
-          selected: false,
-          disabled: false
-        }, option, attrs);
-      }
-    },
-    onArrowPress: function onArrowPress(offset) {
-      // If not seeking, add the class
-      if (!this.$el.classList.contains('is-seeking')) {
-        this.$el.classList.add('is-seeking');
-      }
-
-      var permitted = this.getAvailableOptions().map(function (o) {
-        return o.state.index;
-      }); // `resetHover` uses `debounce`, so it only is called after 100ms
-      // Each call to `resetHover` actually resets the clock
-
-      this.resetHover();
-
-      if (this.highlightIndex < 0 && this.hoverIndex < 0) {
-        // If nothing is highlighted or hovered, highlight the first available option
-        this.highlightIndex = permitted[0];
-      } else if (this.highlightIndex < 0 && this.hoverIndex >= 0) {
-        // If hovering over an option, that option should be highlighted
-        this.highlightIndex = this.hoverIndex;
-      } else {
-        // Ensure our hoverIndex is the same as highlightIndex if not set already
-        if (this.highlightIndex > -1 && this.hoverIndex < 0) this.hoverIndex = this.highlightIndex; // Moving up or down the list, find the next option by the offset given
-
-        var nextIndex = permitted[permitted.indexOf(this.hoverIndex) + offset];
-        if (!isNaN(nextIndex)) this.highlightIndex = nextIndex;
-      } // Consider that highlighting in this context is the same as hovering
-
-
-      this.hoverIndex = this.highlightIndex;
-
-      if (this.open) {
-        // Dropdown is open, so make sure our newly highlighted option is in view
-        this.$nextTick(this.scrollToHighlighted);
-      } else {
-        // Dropdown is closed, so we actually mean to change the selection
-        this.onClickOption(this.highlightIndex);
-      }
-    },
-    onFilter: function onFilter(event) {
-      var code = event.keyCode || event.which;
-      var char = String.fromCharCode(code);
-
-      if (/[a-z0-9-_ ]/i.test(char)) {
-        this.filter += char;
-        var match = new RegExp("^".concat(this.filter), 'i');
-        var tmp = document.createElement('DIV');
-        var result = this.list.filter(function (o) {
-          return !o.state.group && !o.disabled;
-        }).find(function (o) {
-          tmp.innerHTML = o.item;
-          var text = (tmp.textContent || tmp.innerText || o.item).replace(/^\s+/, '');
-          return match.test(text);
-        });
-
-        if (result) {
-          this.onClickOption(result.state.index, this.open);
-        }
-      }
-
-      this.resetFilter();
-    },
-    onHover: function onHover(idx) {
-      this.hoverIndex = idx;
-    },
-    onTab: function onTab(event) {
-      if (this.open && this.focused) {
-        event.preventDefault();
-        this.selectImpliedOption();
-        this.open = false;
-      }
-    },
-    onEnter: function onEnter() {
-      this.selectImpliedOption();
-      this.open = false;
-    },
-    onEscape: function onEscape() {
-      this.open = false;
-    },
-    onToggle: function onToggle(override) {
-      if (this.disabled) return;
-      this.open = override == undefined ? !this.open : override;
-    },
-    onToggleFocus: function onToggleFocus(state) {
-      if (this.disabled) return;
-      this.focused = state;
-    },
-    onClickOutside: function onClickOutside() {
-      // If already closed, lose focus also
-      if (!this.open) this.focused = false;
-      this.open = false;
-    },
-
-    /**
-     * Set the current selected option to the given index,
-     * and highlight it as well. The second parameter can be a truthy/falsy
-     * indicating whether or not to close the dropdown after selecting
-     */
-    onClickOption: function onClickOption(idx, close) {
-      var _this5 = this;
-
-      this.getAvailableOptions().forEach(function (o) {
-        return o.selected = o.state.index == idx;
-      });
-      this.highlightIndex = idx;
-      this.$nextTick(function () {
-        _this5.scrollToHighlighted();
-      });
-      this.open = !!close;
-    },
-
-    /**
-     * When the native select input value changes,
-     * find the index of the option from the value
-     * and update the selected option in the data +list+
-     */
-    onSelectChanged: function onSelectChanged(event) {
-      var option = this.getAvailableOptions().find(function (o) {
-        return o.value == event.target.value;
-      });
-      if (option) this.onClickOption(option.state.index);
-    },
-
-    /**
-     * Implied option is first and foremost the option that
-     * currently is highlighted. If no option is highlighted,
-     * fall back to the currently hovered option, if any.
-     * If no options with either hover or highlight state, does nothing
-     */
-    selectImpliedOption: function selectImpliedOption() {
-      if (this.highlightIndex > -1) {
-        this.onClickOption(this.highlightIndex, true);
-      } else if (this.hoverIndex > -1) {
-        this.onClickOption(this.hoverIndex, true);
-      }
-    },
-    scrollToHighlighted: function scrollToHighlighted() {
-      var highlighted = this.$refs.options.querySelector('.is-highlighted');
-      var options = this.$refs.scroll || this.$refs.options;
-
-      if (highlighted) {
-        var optionBottom = highlighted.offsetTop - options.offsetHeight + highlighted.offsetHeight + options.offsetHeight;
-        var scrollBottom = options.scrollTop + options.offsetHeight;
-
-        if (optionBottom >= scrollBottom) {
-          options.scrollTop = highlighted.offsetTop - options.offsetHeight + highlighted.offsetHeight;
-        } else if (highlighted.offsetTop < options.scrollTop) {
-          options.scrollTop = highlighted.offsetTop;
-        }
-      }
-    },
-    hasAvailableOptions: function hasAvailableOptions() {
-      return this.getAvailableOptions().length > 0;
-    },
-    getAvailableOptions: function getAvailableOptions() {
-      return this.list.filter(function (o) {
-        return !o.state.group && !o.disabled;
-      });
-    },
-    isMobile: function isMobile() {
-      if (this.native instanceof Function) {
-        return this.native(navigator.userAgent);
-      }
-
-      return this.native && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    },
-    resetFilter: Object(debounce["debounce"])(function () {
-      this.filter = '';
-    }, 500),
-    resetHover: Object(debounce["debounce"])(function () {
-      this.$el.classList.remove('is-seeking');
-    }, 100)
-  },
-  computed: {
-    classes: function classes() {
-      return [{
-        'is-focused': this.focused
-      }, {
-        'is-disabled': this.disabled
-      }, {
-        'is-open': this.open
-      }, {
-        'is-mobile': this.isMobile()
-      }, {
-        'is-placeholding': !this.selection
-      }, this.direction];
-    },
-    variables: function variables() {
-      return {
-        '--height': "".concat(this.height, "px"),
-        '--width': this.width == 'auto' ? 'auto' : "".concat(this.width, "px"),
-        '--top': "".concat(this.top + (this.$refs.label ? this.$refs.label.offsetHeight : 0), "px"),
-        '--left': "".concat(this.left, "px")
-      };
-    },
-    selection: function selection() {
-      return this.list.find(function (o) {
-        return !o.state.group && !o.disabled && o.selected;
-      });
-    },
-    label: function label() {
-      if (this.highlighted) {
-        return this.highlighted.label;
-      }
-
-      return null;
-    },
-    highlighted: function highlighted() {
-      return this.list.find(function (o) {
-        return o.state.highlighted;
-      });
-    }
-  },
-  data: function data() {
-    return {
-      open: false,
-      focused: false,
-      width: 'auto',
-      list: [],
-      groups: [],
-      hoverIndex: -1,
-      highlightIndex: -1,
-      filter: '',
-      top: 0,
-      left: 0,
-      height: this.size,
-      direction: 'is-down'
-    };
-  }
-});
 // CONCATENATED MODULE: ./src/select.vue?vue&type=script&lang=js&
- /* harmony default export */ var src_selectvue_type_script_lang_js_ = (selectvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/select.vue?vue&type=style&index=0&id=56fe985c&lang=scss&scoped=true&
-var selectvue_type_style_index_0_id_56fe985c_lang_scss_scoped_true_ = __webpack_require__("2191");
+ /* harmony default export */ var src_selectvue_type_script_lang_js_ = (selectvue_type_script_lang_js_["a" /* default */]); 
+// EXTERNAL MODULE: ./src/select.vue?vue&type=style&index=0&id=81febee0&lang=scss&scoped=true&
+var selectvue_type_style_index_0_id_81febee0_lang_scss_scoped_true_ = __webpack_require__("abb0");
 
 // EXTERNAL MODULE: ./src/select.vue?vue&type=style&index=1&lang=scss&
 var selectvue_type_style_index_1_lang_scss_ = __webpack_require__("3688");
+
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
 
 // CONCATENATED MODULE: ./src/select.vue
 
@@ -3289,40 +3724,24 @@ var selectvue_type_style_index_1_lang_scss_ = __webpack_require__("3688");
 
 /* normalize component */
 
-var select_component = normalizeComponent(
+var component = Object(componentNormalizer["a" /* default */])(
   src_selectvue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
   null,
-  "56fe985c",
+  "81febee0",
   null
   
 )
 
-select_component.options.__file = "select.vue"
-/* harmony default export */ var src_select = (select_component.exports);
+/* harmony default export */ var src_select = (component.exports);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
 /* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_select);
 
 
-
-/***/ }),
-
-/***/ "fdbe":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("e2ca");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("36e2c3b8", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
