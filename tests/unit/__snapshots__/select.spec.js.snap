@@ -10,7 +10,7 @@ exports[`select.vue should be opened when label is clicked 1`] = `
 exports[`select.vue should highlight the first available option on keypress 1`] = `
 <div role="listbox" tabindex="0" class="v-select is-down">
   <div class="label">Arizona</div>
-  <div aria-hidden="true" class="options" style="">
+  <div aria-hidden="true" class="options" style="animation-duration: 0s;">
     <div role="option" aria-disabled="true" aria-selected="false" class="v-option is-disabled" style="padding-left: 12px;">
       <div class="label">Alabama</div>
     </div>
