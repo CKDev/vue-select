@@ -359,6 +359,11 @@ export default {
      * indicating whether or not to close the dropdown after selecting
      */
     onClickOption: function(idx, close){
+      const option = this.list.find(o => o.state.index === idx)
+
+      // If disabled, don't do anything
+      if(option && option.disabled) return false
+
       this.getAvailableOptions().forEach(o => o.selected = o.state.index == idx)
       this.highlightIndex = idx
 
