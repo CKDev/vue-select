@@ -17,9 +17,7 @@
     "directives"
   ],
   "dependencies": {
-    "debounce": "^1.2.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1"
+    "debounce": "^1.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
@@ -33,6 +31,8 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
     "vue": "^2.5.17",
     "vue-jest": "^3.0.2",
     "vue-template-compiler": "^2.5.17"
