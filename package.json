@@ -1,6 +1,6 @@
 {
   "name": "@ckd/vue-select",
-  "version": "0.1.1-alpha.12",
+  "version": "0.1.1-alpha.13",
   "license": "MIT",
   "homepage": "https://github.com/CKDev/vue-select",
   "scripts": {
@@ -103,7 +103,9 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
+    "last 5 versions",
+    "safari >= 7",
+    "ios_saf >= 9",
     "not ie <= 8"
   ]
 }
