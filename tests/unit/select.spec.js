@@ -2,7 +2,6 @@ import { mount, shallowMount } from '@vue/test-utils'
 import Select from '@/select.vue'
 
 import States from './data/states.json'
-import Cocktails from './data/cocktails.json'
 
 describe('select.vue', () => {
   it('should render a vue instance', () => {

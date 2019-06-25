@@ -82,33 +82,26 @@ export default {
 
     // When clicked anywhere, close the dropdown
     // This event is prevented if the click occurs on the dropdown itself
-    document.addEventListener('click', (event) => {
-      if(!this.$el.contains(event.target)){
-        this.onClickOutside()
-      }
-    })
+    document.addEventListener('click', this.onClickHandler)
 
     // When a scroll event occurs anywhere except the dropdown itself,
     // close the dropdown, but continue to re-position it as it scrolls
     // The re-positioning is to take into account longer transition-out animations
-    window.addEventListener('scroll', (event) => {
-      this.calcPosition()
-      this.calcDirection()
-      if(this.open && !this.$el.contains(event.target)) this.open = false
-    }, true)
+    window.addEventListener('scroll', this.onScrollHandler, true)
 
     this.calcPosition()
     this.calcDirection()
     this.calcDimensions()
   },
-  updated: function(){
-    this.$nextTick(() => {
-      this.calcPosition()
-      this.calcDirection()
-      this.calcDimensions()
-    })
+  /**
+   * Cleanup event listeners
+   */
+  beforeDestroy: function(){
+    document.removeEventListener('click', this.onClickHandler)
+    window.removeEventListener('scroll', this.onScrollHandler, true)
   },
   watch: {
+    
     open: function(is_open){
       // Unset the animation duration override, allow
       // the written animation to take place
@@ -481,7 +474,17 @@ export default {
       left: 0,
       height: this.size,
       direction: 'is-down',
-      agent: ''
+      agent: '',
+      onClickHandler: (event) => {
+        if(!this.$el.contains(event.target)){
+          this.onClickOutside()
+        }
+      },
+      onScrollHandler: (event) => {
+        this.calcPosition()
+        this.calcDirection()
+        if(this.open && !this.$el.contains(event.target)) this.open = false
+      }
     }
   }
 }
